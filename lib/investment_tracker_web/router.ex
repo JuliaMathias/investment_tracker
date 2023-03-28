@@ -19,6 +19,7 @@ defmodule InvestmentTrackerWeb.Router do
 
     get "/", PageController, :home
     resources "/investments", InvestmentController
+    resources "/operations", OperationController
   end
 
   # Other scopes may use custom stacks.

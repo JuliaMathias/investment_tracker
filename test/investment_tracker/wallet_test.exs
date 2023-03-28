@@ -90,4 +90,60 @@ defmodule InvestmentTracker.WalletTest do
       assert %Ecto.Changeset{} = Wallet.change_investment(investment)
     end
   end
+
+  describe "operations" do
+    alias InvestmentTracker.Wallet.Operation
+
+    import InvestmentTracker.WalletFixtures
+
+    @invalid_attrs %{type: nil, value: nil}
+
+    test "list_operations/0 returns all operations" do
+      operation = operation_fixture()
+      assert Wallet.list_operations() == [operation]
+    end
+
+    test "get_operation!/1 returns the operation with given id" do
+      operation = operation_fixture()
+      assert Wallet.get_operation!(operation.id) == operation
+    end
+
+    test "create_operation/1 with valid data creates a operation" do
+      valid_attrs = %{type: :deposit, value: 42}
+
+      assert {:ok, %Operation{} = operation} = Wallet.create_operation(valid_attrs)
+      assert operation.type == :deposit
+      assert operation.value == 42
+    end
+
+    test "create_operation/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Wallet.create_operation(@invalid_attrs)
+    end
+
+    test "update_operation/2 with valid data updates the operation" do
+      operation = operation_fixture()
+      update_attrs = %{type: :withdraw, value: 43}
+
+      assert {:ok, %Operation{} = operation} = Wallet.update_operation(operation, update_attrs)
+      assert operation.type == :withdraw
+      assert operation.value == 43
+    end
+
+    test "update_operation/2 with invalid data returns error changeset" do
+      operation = operation_fixture()
+      assert {:error, %Ecto.Changeset{}} = Wallet.update_operation(operation, @invalid_attrs)
+      assert operation == Wallet.get_operation!(operation.id)
+    end
+
+    test "delete_operation/1 deletes the operation" do
+      operation = operation_fixture()
+      assert {:ok, %Operation{}} = Wallet.delete_operation(operation)
+      assert_raise Ecto.NoResultsError, fn -> Wallet.get_operation!(operation.id) end
+    end
+
+    test "change_operation/1 returns a operation changeset" do
+      operation = operation_fixture()
+      assert %Ecto.Changeset{} = Wallet.change_operation(operation)
+    end
+  end
 end

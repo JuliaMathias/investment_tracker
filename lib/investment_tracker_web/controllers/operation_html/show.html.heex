@@ -1,0 +1,16 @@
+<.header>
+  Operation <%= @operation.id %>
+  <:subtitle>This is a operation record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/operations/#{@operation}/edit"}>
+      <.button>Edit operation</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Type"><%= @operation.type %></:item>
+  <:item title="Value"><%= @operation.value %></:item>
+</.list>
+
+<.back navigate={~p"/operations"}>Back to operations</.back>

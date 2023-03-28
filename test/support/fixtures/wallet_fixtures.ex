@@ -22,4 +22,19 @@ defmodule InvestmentTracker.WalletFixtures do
 
     investment
   end
+
+  @doc """
+  Generate a operation.
+  """
+  def operation_fixture(attrs \\ %{}) do
+    {:ok, operation} =
+      attrs
+      |> Enum.into(%{
+        type: :deposit,
+        value: 42
+      })
+      |> InvestmentTracker.Wallet.create_operation()
+
+    operation
+  end
 end
