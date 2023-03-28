@@ -4,13 +4,16 @@
   </.error>
   <.input field={f[:name]} type="text" label="Name" />
   <.input
+    id="investment-type"
+    onchange="updateSubtypeOptions()"
     field={f[:type]}
     type="select"
     label="Type"
     prompt="Choose a value"
     options={Ecto.Enum.values(InvestmentTracker.Wallet.Investment, :type)}
   />
-   <.input
+  <.input
+    id="investment-subtype"
     field={f[:subtype]}
     type="select"
     label="Sub-type"

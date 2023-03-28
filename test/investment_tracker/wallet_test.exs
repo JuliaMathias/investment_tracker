@@ -1,13 +1,13 @@
 defmodule InvestmentTracker.WalletTest do
   use InvestmentTracker.DataCase
 
+  import InvestmentTracker.WalletFixtures
+
   alias InvestmentTracker.Wallet
+  alias InvestmentTracker.Wallet.Investment
+  alias InvestmentTracker.Wallet.Operation
 
   describe "investments" do
-    alias InvestmentTracker.Wallet.Investment
-
-    import InvestmentTracker.WalletFixtures
-
     @invalid_attrs %{
       current_value: nil,
       expiration_date: nil,
@@ -48,6 +48,38 @@ defmodule InvestmentTracker.WalletTest do
 
     test "create_investment/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Wallet.create_investment(@invalid_attrs)
+    end
+
+    test "create_investment/1 with invalid subtype returns error changeset" do
+      invalid_attrs = %{
+        current_value: 42,
+        expiration_date: ~D[2023-03-27],
+        initial_value: 42,
+        name: "some name",
+        # Invalid subtype for :fundos type
+        subtype: :cdb,
+        type: :fundos
+      }
+
+      {:error, changeset} = Wallet.create_investment(invalid_attrs)
+      assert %{subtype: ["is invalid for the selected type"]} = errors_on(changeset)
+    end
+
+    test "update_investment/2 with invalid subtype returns error changeset" do
+      investment = investment_fixture()
+
+      update_attrs = %{
+        current_value: 43,
+        expiration_date: ~D[2023-03-28],
+        initial_value: 43,
+        name: "some updated name",
+        # Invalid subtype for :fundos type
+        subtype: :cdb,
+        type: :fundos
+      }
+
+      {:error, changeset} = Wallet.update_investment(investment, update_attrs)
+      assert %{subtype: ["is invalid for the selected type"]} = errors_on(changeset)
     end
 
     test "update_investment/2 with valid data updates the investment" do
@@ -92,10 +124,6 @@ defmodule InvestmentTracker.WalletTest do
   end
 
   describe "operations" do
-    alias InvestmentTracker.Wallet.Operation
-
-    import InvestmentTracker.WalletFixtures
-
     @invalid_attrs %{type: nil, value: nil}
 
     test "list_operations/0 returns all operations" do

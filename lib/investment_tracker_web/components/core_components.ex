@@ -171,7 +171,7 @@ defmodule InvestmentTrackerWeb.CoreComponents do
         </:actions>
       </.simple_form>
   """
-  attr :for, :any, required: true, doc: "the datastructure for the form"
+  attr :for, :any, required: true, doc: "the data structure for the form"
   attr :as, :any, default: nil, doc: "the server side parameter to collect all input under"
 
   attr :rest, :global,
@@ -254,6 +254,7 @@ defmodule InvestmentTrackerWeb.CoreComponents do
   attr :prompt, :string, default: nil, doc: "the prompt for select inputs"
   attr :options, :list, doc: "the options to pass to Phoenix.HTML.Form.options_for_select/2"
   attr :multiple, :boolean, default: false, doc: "the multiple flag for select inputs"
+  attr :onchange, :string, default: nil, doc: "the on_change event for select inputs"
 
   attr :rest, :global,
     include: ~w(autocomplete cols disabled form list max maxlength min minlength
@@ -303,6 +304,7 @@ defmodule InvestmentTrackerWeb.CoreComponents do
         name={@name}
         class="mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-zinc-400 focus:ring-0 sm:text-sm"
         multiple={@multiple}
+        onchange={@onchange}
         {@rest}
       >
         <option :if={@prompt} value=""><%= @prompt %></option>

@@ -27,5 +27,26 @@ defmodule InvestmentTracker.Wallet.Investment do
     investment
     |> cast(attrs, [:name, :type, :subtype, :initial_value, :current_value, :expiration_date])
     |> validate_required([:name, :type, :initial_value, :current_value])
+    |> validate_subtype()
+  end
+
+  defp validate_subtype(changeset) do
+    type = get_field(changeset, :type)
+    subtype = get_field(changeset, :subtype)
+
+    allowed_subtypes =
+      case type do
+        :renda_fixa -> @renda_fixa
+        :fundos -> @fundos
+        :tesouro_direto -> @tesouro_direto
+        :renda_variavel -> @renda_variavel
+        _ -> []
+      end
+
+    if subtype in allowed_subtypes do
+      changeset
+    else
+      add_error(changeset, :subtype, "is invalid for the selected type")
+    end
   end
 end
