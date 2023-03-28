@@ -1,0 +1,8 @@
+<.header>
+  Edit Investment <%= @investment.id %>
+  <:subtitle>Use this form to manage investment records in your database.</:subtitle>
+</.header>
+
+<.investment_form changeset={@changeset} action={~p"/investments/#{@investment}"} />
+
+<.back navigate={~p"/investments"}>Back to investments</.back>

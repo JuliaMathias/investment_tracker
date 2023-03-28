@@ -1,0 +1,28 @@
+<.header>
+  Listing Investments
+  <:actions>
+    <.link href={~p"/investments/new"}>
+      <.button>New Investment</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="investments" rows={@investments} row_click={&JS.navigate(~p"/investments/#{&1}")}>
+  <:col :let={investment} label="Name"><%= investment.name %></:col>
+  <:col :let={investment} label="Type"><%= investment.type %></:col>
+  <:col :let={investment} label="Subtype"><%= investment.subtype %></:col>
+  <:col :let={investment} label="Initial value"><%= investment.initial_value %></:col>
+  <:col :let={investment} label="Current value"><%= investment.current_value %></:col>
+  <:col :let={investment} label="Expiration date"><%= investment.expiration_date %></:col>
+  <:action :let={investment}>
+    <div class="sr-only">
+      <.link navigate={~p"/investments/#{investment}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/investments/#{investment}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={investment}>
+    <.link href={~p"/investments/#{investment}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

@@ -1,0 +1,14 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:name]} type="text" label="Name" />
+  <.input field={f[:type]} type="text" label="Type" />
+  <.input field={f[:subtype]} type="text" label="Subtype" />
+  <.input field={f[:initial_value]} type="number" label="Initial value" />
+  <.input field={f[:current_value]} type="number" label="Current value" />
+  <.input field={f[:expiration_date]} type="date" label="Expiration date" />
+  <:actions>
+    <.button>Save Investment</.button>
+  </:actions>
+</.simple_form>

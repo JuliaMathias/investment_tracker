@@ -18,6 +18,7 @@ defmodule InvestmentTrackerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    resources "/investments", InvestmentController
   end
 
   # Other scopes may use custom stacks.
