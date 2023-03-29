@@ -1,0 +1,120 @@
+EXTRATO DE POSIÇÃO DE RENDA FIXA,,,,,,,,,,,,,
+Emissão: 28/03/2023,,,,,,,,,,,,,
+,,,,,"Bank X
+Avenida da Maria, 9999, Aparecida, SP/SP - Cep: 99999999
+Contato: (99) 9999-9999
+www.bankx.com.br/mesa@bankx.com.br
+CNPJ: 000.000.000/0000-00",,,,,,,,
+Agência:,1,Conta:,,,000000001 Posição em: 28/03/2023,,,,,,,,
+EXTRATO DE POSIÇÃO DE RENDA FIXA,,,,,,,,,,,,,
+CDB YZC,,,,,,,,,,,,,
+,"Valor Bruto R$ 1.234,56",,,,"Valor Líquido Total: R$ 1.219,21",,,,,"Valor Aplicado Total: R$ 1.050,00",,,
+Nota,Data Início,"Data
+Vencimento","Valor
+Aplicação","Tipo
+Aplicação","Taxa
+Aplicação",,"Valor
+Rendimento","Valor
+Retirada","Valor
+Desconto","Valor
+Bruto","Valor Previsão
+Desconto","Valor
+Líquido",IR/IOF
+000001,01/01/2022,01/01/2024,"R$ 1.000,00",CDB,"CDI + 6,00% a.a.",,-,-,-,"R$ 1.234,56","R$ 15,35","R$ 1.219,21","15,35%"
+CDB LIMIT PLUS,,,,,,,,,,,,,
+,"Valor Bruto R$ 12.345,67",,,,,"Valor Líquido Total: R$ 12.311,49",,,,"Valor Aplicado Total: R$ 12.000,00",,,
+Nota,Data Início,"Data
+Vencimento",,"Valor
+Aplicação","Tipo
+Aplicação","Taxa
+Aplicação","Valor
+Rendimento","Valor
+Retirada","Valor
+Desconto","Valor
+Bruto","Valor Previsão
+Desconto","Valor
+Líquido",IR/IOF
+000002,01/01/2022,01/01/2025,"R$ 1.200,00",,CDB,80% do CDI,"R$ 41,65","R$ 0,00","R$ 0,00","R$ 1.241,65","R$ 9,37","R$ 1.232,28","22,5%"
+000002,01/01/2022,01/01/2025,"R$ 1.200,00",,CDB,80% do CDI,"R$ 41,65","R$ 0,00","R$ 0,00","R$ 1.241,65","R$ 9,37","R$ 1.232,28","22,5%"
+000003,01/01/2023,01/01/2026,"R$ 10.000,00",,CDB,80% do CDI,"R$ 110,28","R$ 0,00","R$ 0,00","R$ 10.110,28","R$ 24,81","R$ 10.085,47","22,5%"
+Página 1 de 3,,,,,,,,,,,,
+,,,,,,,,,,,,,
+EXTRATO DE POSIÇÃO DE RENDA FIXA,,,,,,,,,,,,,
+CRA GREEN130S2,,,,,,,,,,,,,
+,"Valor Bruto R$ 1.128,30",,,,"Valor Líquido Total: R$ 1.128,30",,,,"Valor Aplicado Total: R$ 1.078,25",,,,
+Nota,Data Início,"Data
+Vencimento","Valor
+Aplicação","Tipo
+Aplicação","Taxa
+Aplicação","Valor
+Rendimento","Valor
+Retirada","Valor
+Desconto","Valor
+Bruto","Valor Previsão
+Desconto","Valor
+Líquido",IR/IOF,
+475331,22/11/2022,17/07/2029,"R$ 1.078,25",CRA,"IPCA + 6,85% a.a.",-,-,-,"R$ 1.128,30","R$ 0,00","R$ 1.128,30",0%,
+CRI STRAIGHTS175E2,,,,,,,,,,,,,
+,"Valor Bruto R$ 2.034,56",,,,"Valor Líquido Total: R$ 2.034,56",,,,"Valor Aplicado Total: R$ 2.900,34",,,,
+Nota,Data Início,"Data
+Vencimento","Valor
+Aplicação","Tipo
+Aplicação","Taxa
+Aplicação","Valor
+Rendimento","Valor
+Retirada","Valor
+Desconto","Valor
+Bruto","Valor Previsão
+Desconto","Valor
+Líquido",IR/IOF,
+193210,15/06/2021,20/11/2024,"R$ 2.900,34",CRI,"IPCA + 5,80% a.a.",-,-,-,"R$ 2.034,56","R$ 0,00","R$ 2.034,56",0%,
+193210,15/06/2022,20/11/2024,"R$ 2.900,34",CRI,"IPCA + 5,80% a.a.",-,-,-,"R$ 2.034,56","R$ 0,00","R$ 2.034,56",0%,
+DEBENTURE LIGHB6,,,,,,,,,,,,,
+,"Valor Bruto R$ 5.734,25",,,,"Valor Líquido Total: R$ 5.734,25",,,,"Valor Aplicado Total: R$ 5.573,61",,,,
+Nota,Data Início,"Data
+Vencimento","Valor
+Aplicação","Tipo
+Aplicação","Taxa
+Aplicação","Valor
+Rendimento","Valor
+Retirada","Valor
+Desconto","Valor
+Bruto","Valor Previsão
+Desconto","Valor
+Líquido",IR/IOF,
+193210,15/06/2022,17/10/2025,"R$ 5.573,61",DEB,"IPCA + 5,75% a.a.",-,-,-,"R$ 5.734,25","R$ 0,00","R$ 5.734,25",0%,
+Página 2 de 3,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+EXTRATO DE POSIÇÃO DE RENDA FIXA,,,,,,,,,,,,,
+LCA XYZ,,,,,,,,,,,,,
+,"Valor Bruto R$ 3.292,38",,,,"Valor Líquido Total: R$ 3.292,38",,,,"Valor Aplicado Total: R$ 3.112,14",,,,
+Nota,Data Início,"Data
+Vencimento","Valor
+Aplicação","Tipo
+Aplicação","Taxa
+Aplicação","Valor
+Rendimento","Valor
+Retirada","Valor
+Desconto","Valor
+Bruto","Valor Previsão
+Desconto","Valor
+Líquido",IR/IOF,
+284430,22/08/2022,12/08/2023,"R$ 3.112,14",LCA,"IPCA + 5,65% a.a.",-,-,-,"R$ 3.292,38","R$ 0,00","R$ 3.292,38",0%,
+LCI MNO,,,,,,,,,,,,,
+,"Valor Bruto R$ 3.365,24",,,,"Valor Líquido Total: R$ 3.365,24",,,,"Valor Aplicado Total: R$ 3.117,29",,,,
+Nota,Data Início,"Data
+Vencimento","Valor
+Aplicação","Tipo
+Aplicação","Taxa
+Aplicação","Valor
+Rendimento","Valor
+Retirada","Valor
+Desconto","Valor
+Bruto","Valor Previsão
+Desconto","Valor
+Líquido",IR/IOF,
+284428,22/08/2022,11/08/2023,"R$ 3.117,29",LCI,"12,45% a.a.",-,-,-,"R$ 3.365,24","R$ 0,00","R$ 3.365,24",0%,
+Canais de Atendimento UniBank,,,,,,,,,,,,,
+SAC: 0800 123 4567 (opção 09) - Deficiente de Fala e Audição 0800 987 6543,,,,,,,,,,,,,
+Ouvidoria: 0800 123 6789 - ouvidoria@unibank.com.br,,,,,,,,,,,,,
+Página 3 de 3,,,,,,,,,,,,,
