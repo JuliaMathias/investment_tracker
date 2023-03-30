@@ -1,4 +1,11 @@
 defmodule InvestmentTracker.Wallet.Operation do
+  @moduledoc """
+  This module defines the schema and changeset for `Operation` records.
+
+  An `Operation` record represents an action performed on an investment,
+  such as deposit, withdraw, or update. Each operation has a `type`, `value`,
+  and `investment_id` associated with it.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

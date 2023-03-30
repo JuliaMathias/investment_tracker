@@ -1,4 +1,12 @@
 defmodule InvestmentTracker.Wallet.Investment do
+  @moduledoc """
+  The Investment module represents an investment within the wallet.
+  It defines the schema for the investments table and provides a changeset function
+  for validation and casting of investment attributes.
+
+  The module supports different investment types, including renda_fixa, fundos, tesouro_direto, and renda_variavel,
+  and a variety of subtypes for each main type.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
