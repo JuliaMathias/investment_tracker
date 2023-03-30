@@ -1,0 +1,8 @@
+<.header>
+  Edit Operation <%= @operation.id %>
+  <:subtitle>Use this form to manage operation records in your database.</:subtitle>
+</.header>
+
+<.operation_form changeset={@changeset} action={~p"/operations/#{@operation}"} />
+
+<.back navigate={~p"/operations"}>Back to operations</.back>

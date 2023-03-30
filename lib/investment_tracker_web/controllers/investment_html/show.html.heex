@@ -1,0 +1,20 @@
+<.header>
+  Investment <%= @investment.id %>
+  <:subtitle>This is a investment record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/investments/#{@investment}/edit"}>
+      <.button>Edit investment</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @investment.name %></:item>
+  <:item title="Type"><%= @investment.type %></:item>
+  <:item title="Subtype"><%= @investment.subtype %></:item>
+  <:item title="Initial value"><%= @investment.initial_value %></:item>
+  <:item title="Current value"><%= @investment.current_value %></:item>
+  <:item title="Expiration date"><%= @investment.expiration_date %></:item>
+</.list>
+
+<.back navigate={~p"/investments"}>Back to investments</.back>

@@ -1,0 +1,29 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:name]} type="text" label="Name" />
+  <.input
+    id="investment-type"
+    onchange="updateSubtypeOptions()"
+    field={f[:type]}
+    type="select"
+    label="Type"
+    prompt="Choose a value"
+    options={Ecto.Enum.values(InvestmentTracker.Wallet.Investment, :type)}
+  />
+  <.input
+    id="investment-subtype"
+    field={f[:subtype]}
+    type="select"
+    label="Sub-type"
+    prompt="Choose a value"
+    options={Ecto.Enum.values(InvestmentTracker.Wallet.Investment, :subtype)}
+  />
+  <.input field={f[:initial_value]} type="number" label="Initial value" />
+  <.input field={f[:current_value]} type="number" label="Current value" />
+  <.input field={f[:expiration_date]} type="date" label="Expiration date" />
+  <:actions>
+    <.button>Save Investment</.button>
+  </:actions>
+</.simple_form>

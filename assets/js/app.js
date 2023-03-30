@@ -26,9 +26,31 @@ let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
-window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
-window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
+// update select fields
+function updateSubtypeOptions() {
+  const typeSelect = document.getElementById("investment-type");
+  const subtypeSelect = document.getElementById("investment-subtype");
+  const selectedType = typeSelect.value;
+
+  const subtypes = {
+    renda_fixa: ["cdb", "lci_lca", "cri_cra", "debentures"],
+    fundos: ["renda_fixa", "multimercado"],
+    tesouro_direto: ["selic", "prefixado", "ipca"],
+    renda_variavel: ["fiis"],
+  };
+
+  const options = subtypes[selectedType] || [];
+  subtypeSelect.innerHTML = '<option value="">Choose a value</option>';
+
+  options.forEach((option) => {
+    const opt = document.createElement("option");
+    opt.value = option;
+    opt.text = option;
+    subtypeSelect.add(opt);
+  });
+}
+
+window.updateSubtypeOptions = updateSubtypeOptions;
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
