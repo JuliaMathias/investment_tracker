@@ -1,0 +1,7 @@
+Produto,Instituição,Código ISIN,Indexador,Vencimento,Quantidade,Quantidade Disponível,Quantidade Indisponível,Motivo,Valor Aplicado,Valor bruto,Valor líquido,Valor Atualizado
+Tesouro Selic 2025,ANON DISTRIBUIDORA DE TITULOS E VALORES MOBILIARIOS LTDA,BRSTNCLF1RC4,SELIC,01/03/2025,"2,1","2,1",0,-," R$24.430,23 "," R$27.358,72 "," R$26.765,04 "," R$27.358,72 "
+Tesouro Prefixado 2029,ANON DISTRIBUIDORA DE TITULOS E VALORES MOBILIARIOS LTDA,BRSTNCLF1RC5,Prefixado,01/12/2029,"3,2","3,2",0,-," R$31.234,56 "," R$35.987,21 "," R$34.905,43 "," R$35.987,21 "
+Tesouro IPCA+ Com Juros Semestrais 2032,ANON DISTRIBUIDORA DE TITULOS E VALORES MOBILIARIOS LTDA,BRSTNCLF1RC5,IPCA+ Com Juros,15/08/2032,"4,5","4,5",0,-," R$55.432,12 "," R$62.876,45 "," R$61.234,56 "," R$62.876,45 "
+,,,,,,,,,,,,
+,,,,,,,,,,,,Total
+,,,,,,,,,,,," R$122.905,03 "

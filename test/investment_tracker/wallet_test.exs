@@ -1,5 +1,6 @@
 defmodule InvestmentTracker.WalletTest do
-  use InvestmentTracker.DataCase
+  @moduledoc false
+  use InvestmentTracker.DataCase, async: true
 
   import InvestmentTracker.WalletFixtures
 
