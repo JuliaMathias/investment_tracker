@@ -21,6 +21,16 @@ defmodule InvestmentTracker.CSVs.CSV do
     timestamps()
   end
 
+  @type t :: %__MODULE__{
+          id: binary(),
+          content: String.t(),
+          title: String.t(),
+          type: :renda_fixa | :fundos | :tesouro_direto | :renda_variavel,
+          imported?: boolean,
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
+        }
+
   @doc false
   def changeset(csv, attrs) do
     csv
