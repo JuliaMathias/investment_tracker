@@ -1,4 +1,10 @@
 defmodule InvestmentTracker.CSVs.CSV do
+  @moduledoc """
+  An Ecto schema representing a CSV file
+  containing investment data. It includes the content of the CSV, a title,
+  an investment type, and a flag to track if the CSV has been imported.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 
