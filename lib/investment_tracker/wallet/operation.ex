@@ -24,7 +24,7 @@ defmodule InvestmentTracker.Wallet.Operation do
   @doc false
   def changeset(operation, attrs) do
     operation
-    |> cast(attrs, [:type, :value])
-    |> validate_required([:type, :value])
+    |> cast(attrs, [:type, :value, :investment_id])
+    |> validate_required([:type, :value, :investment_id])
   end
 end
