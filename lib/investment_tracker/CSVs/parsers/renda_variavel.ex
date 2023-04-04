@@ -8,9 +8,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaVariavel do
   alias NimbleCSV.RFC4180, as: NimbleCSV
 
   @doc """
-  Parses a CSV file containing Renda Variável investment data.
-
-  The file should be provided as a binary string.
+  Parses a CSV struct containing Renda Variável investment data.
 
   Returns a list of maps with the investment data.
   """

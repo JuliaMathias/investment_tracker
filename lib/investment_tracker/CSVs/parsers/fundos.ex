@@ -1,6 +1,6 @@
 defmodule InvestmentTracker.CSVs.Parsers.Fundos do
   @moduledoc """
-  A module to parse CSV files for Fundos (Investment Funds) and extract relevant
+  A module to parse CSV structs for Fundos (Investment Funds) and extract relevant
   information.
   """
 

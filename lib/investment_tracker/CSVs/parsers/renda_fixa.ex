@@ -1,6 +1,6 @@
 defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
   @moduledoc """
-  A parser for renda fixa investment CSV files, extracting relevant information
+  A parser for renda fixa investment CSV structs, extracting relevant information
   and returning a list of maps.
   """
   alias InvestmentTracker.CSVs.CSV
@@ -10,7 +10,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
   @prefixes ~w(CDB CRA CRI DEBENTURE LCA LCI)
 
   @doc """
-  Parses a CSV file and returns a list of maps with investment information.
+  Parses a CSV struct and returns a list of maps with investment information.
   """
   @spec parse_csv(CSV.t()) :: list(map())
   def parse_csv(%{content: csv}) do
