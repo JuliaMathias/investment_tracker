@@ -4,19 +4,17 @@ defmodule InvestmentTracker.CSVs.Parsers.Fundos do
   information.
   """
 
+  alias InvestmentTracker.CSVs.CSV
   alias InvestmentTracker.CSVs.Parsers.Utils
   alias NimbleCSV.RFC4180, as: NimbleCSV
 
   @doc """
-  Parses the given CSV file and returns a list of maps containing relevant
+  Parses the given CSV struct and returns a list of maps containing relevant
   information about the fundos.
-
-  ## Parameters
-  - file: A string representing the path to the CSV file.
-
-  ## Returns
-  - A list of maps containing information about the fundos.
   """
+  @spec parse_csv(CSV.t()) :: list(map())
+  def parse_csv(%{content: csv}) do
+    csv
     |> NimbleCSV.parse_string()
     |> Enum.reject(fn x ->
       first = List.first(x)

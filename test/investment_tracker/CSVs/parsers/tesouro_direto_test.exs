@@ -1,13 +1,15 @@
 defmodule InvestmentTracker.CSVs.Parsers.TesouroDiretoTest do
   @moduledoc false
-  use ExUnit.Case, async: true
-  doctest InvestmentTracker.CSVs.Parsers.TesouroDireto
+  use InvestmentTracker.DataCase, async: true
+
+  import InvestmentTracker.CSVsFixtures
+
   alias InvestmentTracker.CSVs.Parsers.TesouroDireto
 
   test "parse_csv/1" do
-    file = "priv/static/reports/tesouro_direto.csv"
+    csv = tesouro_direto_fixture()
 
-    assert TesouroDireto.parse_csv(file) == [
+    assert TesouroDireto.parse_csv(csv) == [
              %{
                current_value: 2_676_504,
                initial_value: 2_443_023,

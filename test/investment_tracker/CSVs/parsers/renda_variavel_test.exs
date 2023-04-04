@@ -1,13 +1,15 @@
 defmodule InvestmentTracker.CSVs.Parsers.RendaVariavelTest do
   @moduledoc false
-  use ExUnit.Case, async: true
-  doctest InvestmentTracker.CSVs.Parsers.RendaVariavel
+  use InvestmentTracker.DataCase, async: true
+
+  import InvestmentTracker.CSVsFixtures
+
   alias InvestmentTracker.CSVs.Parsers.RendaVariavel
 
   test "parse_csv/1" do
-    file = "priv/static/reports/renda_variavel.csv"
+    csv = renda_variavel_fixture()
 
-    assert RendaVariavel.parse_csv(file) == [
+    assert RendaVariavel.parse_csv(csv) == [
              %{
                current_value: 60_450,
                initial_value: 63_300,

@@ -3,6 +3,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
   A parser for renda fixa investment CSV files, extracting relevant information
   and returning a list of maps.
   """
+  alias InvestmentTracker.CSVs.CSV
   alias InvestmentTracker.CSVs.Parsers.Utils
   alias NimbleCSV.RFC4180, as: NimbleCSV
 
@@ -11,8 +12,8 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
   @doc """
   Parses a CSV file and returns a list of maps with investment information.
   """
-  @spec parse_csv(String.t()) :: list(map())
-  def parse_csv(file) do
+  @spec parse_csv(CSV.t()) :: list(map())
+  def parse_csv(%{content: csv}) do
     filter_words = ~w(Emissão: Agência EXTRATO Nota Página Canais SAC Ouvidoria)
 
     chunk_fun = fn element, acc ->
@@ -28,8 +29,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
       acc -> {:cont, Enum.reverse(acc), []}
     end
 
-    file
-    |> File.read!()
+    csv
     |> NimbleCSV.parse_string()
     |> Enum.reject(fn x ->
       first = List.first(x)
