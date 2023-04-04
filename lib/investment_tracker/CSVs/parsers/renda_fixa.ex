@@ -1,18 +1,19 @@
-defmodule InvestmentTracker.CsvParsers.RendaFixa do
+defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
   @moduledoc """
-  A parser for renda fixa investment CSV files, extracting relevant information
+  A parser for renda fixa investment CSV structs, extracting relevant information
   and returning a list of maps.
   """
-  alias InvestmentTracker.CsvParsers.Utils
-  alias NimbleCSV.RFC4180, as: CSV
+  alias InvestmentTracker.CSVs.CSV
+  alias InvestmentTracker.CSVs.Parsers.Utils
+  alias NimbleCSV.RFC4180, as: NimbleCSV
 
   @prefixes ~w(CDB CRA CRI DEBENTURE LCA LCI)
 
   @doc """
-  Parses a CSV file and returns a list of maps with investment information.
+  Parses a CSV struct and returns a list of maps with investment information.
   """
-  @spec parse_csv(String.t()) :: list(map())
-  def parse_csv(file) do
+  @spec parse_csv(CSV.t()) :: list(map())
+  def parse_csv(%{content: csv}) do
     filter_words = ~w(Emissão: Agência EXTRATO Nota Página Canais SAC Ouvidoria)
 
     chunk_fun = fn element, acc ->
@@ -28,9 +29,8 @@ defmodule InvestmentTracker.CsvParsers.RendaFixa do
       acc -> {:cont, Enum.reverse(acc), []}
     end
 
-    file
-    |> File.read!()
-    |> CSV.parse_string()
+    csv
+    |> NimbleCSV.parse_string()
     |> Enum.reject(fn x ->
       first = List.first(x)
 

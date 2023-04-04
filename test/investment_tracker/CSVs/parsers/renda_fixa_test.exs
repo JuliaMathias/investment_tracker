@@ -1,13 +1,15 @@
-defmodule InvestmentTracker.CsvParsers.RendaFixaTest do
+defmodule InvestmentTracker.CSVs.Parsers.RendaFixaTest do
   @moduledoc false
-  use ExUnit.Case, async: true
+  use InvestmentTracker.DataCase, async: true
 
-  alias InvestmentTracker.CsvParsers.RendaFixa
+  import InvestmentTracker.CSVsFixtures
+
+  alias InvestmentTracker.CSVs.Parsers.RendaFixa
 
   test "parse_renda_fixa_csv/1" do
-    file = "priv/static/reports/renda_fixa.csv"
+    csv = renda_fixa_fixture()
 
-    assert RendaFixa.parse_csv(file) == [
+    assert RendaFixa.parse_csv(csv) == [
              %{
                current_value: 336_524,
                expiration_date: ~D[2023-08-11],

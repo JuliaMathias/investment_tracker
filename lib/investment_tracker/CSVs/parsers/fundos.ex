@@ -1,27 +1,21 @@
-defmodule InvestmentTracker.CsvParsers.Fundos do
+defmodule InvestmentTracker.CSVs.Parsers.Fundos do
   @moduledoc """
-  A module to parse CSV files for Fundos (Investment Funds) and extract relevant
+  A module to parse CSV structs for Fundos (Investment Funds) and extract relevant
   information.
   """
 
-  alias InvestmentTracker.CsvParsers.Utils
-  alias NimbleCSV.RFC4180, as: CSV
+  alias InvestmentTracker.CSVs.CSV
+  alias InvestmentTracker.CSVs.Parsers.Utils
+  alias NimbleCSV.RFC4180, as: NimbleCSV
 
   @doc """
-  Parses the given CSV file and returns a list of maps containing relevant
+  Parses the given CSV struct and returns a list of maps containing relevant
   information about the fundos.
-
-  ## Parameters
-  - file: A string representing the path to the CSV file.
-
-  ## Returns
-  - A list of maps containing information about the fundos.
   """
-  @spec parse_csv(String.t()) :: list(map())
-  def parse_csv(file) do
-    file
-    |> File.read!()
-    |> CSV.parse_string()
+  @spec parse_csv(CSV.t()) :: list(map())
+  def parse_csv(%{content: csv}) do
+    csv
+    |> NimbleCSV.parse_string()
     |> Enum.reject(fn x ->
       first = List.first(x)
       Enum.at(x, 3) == "" or String.starts_with?(first, ["TABLE", "Data"])

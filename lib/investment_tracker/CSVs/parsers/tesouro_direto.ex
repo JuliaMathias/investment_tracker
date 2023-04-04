@@ -1,23 +1,21 @@
-defmodule InvestmentTracker.CsvParsers.TesouroDireto do
+defmodule InvestmentTracker.CSVs.Parsers.TesouroDireto do
   @moduledoc """
   A CSV parser for the Tesouro Direto investment information.
   """
 
-  alias InvestmentTracker.CsvParsers.Utils
-  alias NimbleCSV.RFC4180, as: CSV
+  alias InvestmentTracker.CSVs.CSV
+  alias InvestmentTracker.CSVs.Parsers.Utils
+  alias NimbleCSV.RFC4180, as: NimbleCSV
 
-  @spec parse_csv(String.t()) :: list(map())
   @doc """
-  Parses a CSV file containing Tesouro Direto investment data.
-
-  The file should be provided as a binary string.
+  Parses a CSV struct containing Tesouro Direto investment data.
 
   Returns a list of maps with the investment data.
   """
-  def parse_csv(file) do
-    file
-    |> File.read!()
-    |> CSV.parse_string()
+  @spec parse_csv(CSV.t()) :: list(map())
+  def parse_csv(%{content: csv}) do
+    csv
+    |> NimbleCSV.parse_string()
     |> Enum.reject(fn x -> List.first(x) == "" end)
     |> Enum.map(&build_map/1)
   end

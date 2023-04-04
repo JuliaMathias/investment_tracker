@@ -1,0 +1,28 @@
+<.header>
+  Listing Csvs
+  <:actions>
+    <.link href={~p"/csvs/new"}>
+      <.button>New Csv</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="csvs" rows={@csvs} row_click={&JS.navigate(~p"/csvs/#{&1}")}>
+  <:col :let={csv} label="Title"><%= csv.title %></:col>
+  <:col :let={csv} label="Type"><%= csv.type %></:col>
+  <:col :let={csv} label="Created On">
+    <%= Timex.format!(csv.inserted_at, "{0D}.{0M}.{YYYY}") %>
+  </:col>
+  <:col :let={csv} label="Imported?"><%= csv.imported? %></:col>
+  <:action :let={csv}>
+    <div class="sr-only">
+      <.link navigate={~p"/csvs/#{csv}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/csvs/#{csv}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={csv}>
+    <.link href={~p"/csvs/#{csv}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

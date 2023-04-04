@@ -1,13 +1,15 @@
-defmodule InvestmentTracker.CsvParsers.FundosTest do
+defmodule InvestmentTracker.CSVs.Parsers.FundosTest do
   @moduledoc false
-  use ExUnit.Case, async: true
-  doctest InvestmentTracker.CsvParsers.Fundos
-  alias InvestmentTracker.CsvParsers.Fundos
+  use InvestmentTracker.DataCase, async: true
+
+  import InvestmentTracker.CSVsFixtures
+
+  alias InvestmentTracker.CSVs.Parsers.Fundos
 
   test "parse_csv/1" do
-    file = "priv/static/reports/fundos.csv"
+    csv = fundos_fixture()
 
-    assert Fundos.parse_csv(file) == [
+    assert Fundos.parse_csv(csv) == [
              %{
                current_value: 689_292,
                initial_value: 646_965,

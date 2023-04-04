@@ -1,4 +1,4 @@
-defmodule InvestmentTracker.CsvParsers.Utils do
+defmodule InvestmentTracker.CSVs.Parsers.Utils do
   @moduledoc """
   Utility functions for parsing dates and extracting values from strings in CSV parsers.
   """
@@ -9,7 +9,7 @@ defmodule InvestmentTracker.CsvParsers.Utils do
 
   ## Examples
 
-      iex> InvestmentTracker.CsvParsers.Utils.parse_date("15/08/2032")
+      iex> InvestmentTracker.CSVs.Parsers.Utils.parse_date("15/08/2032")
       ~D[2032-08-15]
   """
   def parse_date(date_string) do
@@ -29,7 +29,7 @@ defmodule InvestmentTracker.CsvParsers.Utils do
 
   ## Examples
 
-      iex> InvestmentTracker.CsvParsers.Utils.extract_value("R$ 1.234,56", ~r/R\$ ([\d\.,]+)/)
+      iex> InvestmentTracker.CSVs.Parsers.Utils.extract_value("R$ 1.234,56", ~r/R\$ ([\d\.,]+)/)
       123456
   """
   def extract_value(input_string, regex) do

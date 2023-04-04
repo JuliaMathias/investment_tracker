@@ -1,0 +1,8 @@
+<.header>
+  Edit Csv <%= @csv.id %>
+  <:subtitle>Use this form to manage csv records in your database.</:subtitle>
+</.header>
+
+<.csv_form changeset={@changeset} action={~p"/csvs/#{@csv}"} />
+
+<.back navigate={~p"/csvs"}>Back to csvs</.back>
