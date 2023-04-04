@@ -1,5 +1,6 @@
 defmodule InvestmentTracker.CSVsTest do
-  use InvestmentTracker.DataCase
+  @moduledoc false
+  use InvestmentTracker.DataCase, async: true
 
   alias InvestmentTracker.CSVs
 
@@ -35,7 +36,12 @@ defmodule InvestmentTracker.CSVsTest do
 
     test "update_csv/2 with valid data updates the csv" do
       csv = csv_fixture()
-      update_attrs = %{content: "some updated content", title: "some updated title", type: :fundos}
+
+      update_attrs = %{
+        content: "some updated content",
+        title: "some updated title",
+        type: :fundos
+      }
 
       assert {:ok, %CSV{} = csv} = CSVs.update_csv(csv, update_attrs)
       assert csv.content == "some updated content"
