@@ -66,7 +66,8 @@ defmodule InvestmentTracker.MixProject do
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.16", only: :test},
       {:nimble_csv, "~> 1.1"},
-      {:timex, "~> 3.5"}
+      {:timex, "~> 3.5"},
+      {:ex_machina, "~> 2.7", only: :test}
     ]
   end
 
