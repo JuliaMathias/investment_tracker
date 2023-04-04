@@ -1,0 +1,18 @@
+<.header>
+  Csv <%= @csv.id %>
+  <:subtitle>This is a csv record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/csvs/#{@csv}/edit"}>
+      <.button>Edit csv</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Title"><%= @csv.title %></:item>
+  <:item title="Content"><%= @csv.content %></:item>
+  <:item title="Type"><%= @csv.type %></:item>
+  <:item title="Imported"><%= @csv.imported? %></:item>
+</.list>
+
+<.back navigate={~p"/csvs"}>Back to csvs</.back>
