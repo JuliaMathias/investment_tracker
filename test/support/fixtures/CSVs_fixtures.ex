@@ -9,7 +9,7 @@ defmodule InvestmentTracker.CSVsFixtures do
   @doc """
   Generate a csv.
   """
-  @spec csv_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, %Ecto.Changeset{}}
+  @spec csv_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, Ecto.Changeset.t()}
   def csv_fixture(attrs \\ %{}) do
     {:ok, csv} =
       attrs
@@ -26,7 +26,7 @@ defmodule InvestmentTracker.CSVsFixtures do
   @doc """
   Generate a `:renda_fixa` type csv.
   """
-  @spec renda_fixa_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, %Ecto.Changeset{}}
+  @spec renda_fixa_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, Ecto.Changeset.t()}
   def renda_fixa_fixture(attrs \\ %{}) do
     content = """
     EXTRATO DE POSIÇÃO DE RENDA FIXA,,,,,,,,,,,,,
@@ -166,7 +166,7 @@ defmodule InvestmentTracker.CSVsFixtures do
   @doc """
   Generate a `:fundos` type csv.
   """
-  @spec fundos_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, %Ecto.Changeset{}}
+  @spec fundos_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, Ecto.Changeset.t()}
   def fundos_fixture(attrs \\ %{}) do
     content = """
     "","","","","","","",""
@@ -255,7 +255,7 @@ defmodule InvestmentTracker.CSVsFixtures do
   @doc """
   Generate a `:tesouro_direto` type csv.
   """
-  @spec tesouro_direto_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, %Ecto.Changeset{}}
+  @spec tesouro_direto_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, Ecto.Changeset.t()}
   def tesouro_direto_fixture(attrs \\ %{}) do
     content = """
     Produto,Instituição,Código ISIN,Indexador,Vencimento,Quantidade,Quantidade Disponível,Quantidade Indisponível,Motivo,Valor Aplicado,Valor bruto,Valor líquido,Valor Atualizado
@@ -282,7 +282,7 @@ defmodule InvestmentTracker.CSVsFixtures do
   @doc """
   Generate a `:renda_variavel` type csv.
   """
-  @spec renda_variavel_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, %Ecto.Changeset{}}
+  @spec renda_variavel_fixture(map | keyword) :: {:ok, CSV.t()} | {:error, Ecto.Changeset.t()}
   def renda_variavel_fixture(attrs \\ %{}) do
     content = """
     "","","","","","",""
