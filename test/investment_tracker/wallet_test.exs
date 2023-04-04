@@ -174,4 +174,58 @@ defmodule InvestmentTracker.WalletTest do
       assert %Ecto.Changeset{} = Wallet.change_operation(operation)
     end
   end
+
+  describe "upsert_investment/1" do
+    test "creates a new investment if the name does not exist" do
+      attrs = %{
+        name: "New Investment",
+        type: :renda_fixa,
+        subtype: :cdb,
+        initial_value: 1000,
+        current_value: 1000
+      }
+
+      {:ok, investment} = Wallet.upsert_investment(attrs)
+
+      assert %Investment{} = investment
+      assert investment.name == "New Investment"
+    end
+
+    test "updates an existing investment and creates an operation if the current_value is different" do
+      investment = insert(:investment, name: "Existing Investment", current_value: 1000)
+
+      attrs = %{
+        name: "Existing Investment",
+        current_value: 2000
+      }
+
+      {:ok, {:updated, updated_investment, operation}} = Wallet.upsert_investment(attrs)
+
+      assert %Investment{} = updated_investment
+      assert updated_investment.name == "Existing Investment"
+      assert updated_investment.current_value == 2000
+
+      assert %Operation{} = operation
+      assert operation.type == :update
+      assert operation.value == 1000
+      assert operation.investment_id == investment.id
+    end
+
+    test "does not update the investment or create an operation if the current_value is the same" do
+      _investment = insert(:investment, name: "Unchanged Investment", current_value: 1000)
+
+      attrs = %{
+        name: "Unchanged Investment",
+        current_value: 1000
+      }
+
+      {:ok, unchanged_investment} = Wallet.upsert_investment(attrs)
+
+      assert %Investment{} = unchanged_investment
+      assert unchanged_investment.name == "Unchanged Investment"
+      assert unchanged_investment.current_value == 1000
+
+      refute_received({InvestmentTracker.Repo, :insert, [%Operation{}]})
+    end
+  end
 end

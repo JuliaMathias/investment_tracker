@@ -74,6 +74,62 @@ defmodule InvestmentTracker.Wallet do
   end
 
   @doc """
+  Upserts an investment with the given attributes.
+
+  If an investment with the given name does not exist, it creates a new investment record.
+  If an investment with the given name exists, and the `current_value` is different,
+  it updates the existing record and creates an operation record of type `:update`.
+
+  All changes are atomic. If any operation fails, all changes are rolled back.
+
+  ## Examples
+
+      iex> upsert_investment(%{name: "New Investment", current_value: 1000})
+      {:ok, %Investment{}}
+
+      iex> upsert_investment(%{name: "Existing Investment", current_value: 2000})
+      {:ok, {:updated, %Investment{}, %Operation{}}}
+
+  """
+  @spec upsert_investment(map()) ::
+          {:ok, Investment.t()}
+          | {:ok, {:updated, Investment.t(), Operation.t()}}
+          | {:error, Ecto.Changeset.t()}
+  def upsert_investment(attrs) do
+    name = Map.get(attrs, :name)
+    new_current_value = Map.get(attrs, :current_value)
+
+    case Repo.get_by(Investment, name: name) do
+      nil -> create_investment(attrs)
+      investment -> process_existing_investment(investment, new_current_value)
+    end
+  end
+
+  defp process_existing_investment(investment, new_current_value) do
+    if investment.current_value != new_current_value do
+      update_existing_investment_and_create_operation(investment, new_current_value)
+    else
+      {:ok, investment}
+    end
+  end
+
+  defp update_existing_investment_and_create_operation(investment, new_current_value) do
+    Repo.transaction(fn ->
+      operation_attrs = %{
+        type: :update,
+        value: new_current_value - investment.current_value,
+        investment_id: investment.id
+      }
+
+      with {:ok, operation} <- create_operation(operation_attrs),
+           {:ok, updated_investment} <-
+             update_investment(investment, %{current_value: new_current_value}) do
+        {:updated, updated_investment, operation}
+      end
+    end)
+  end
+
+  @doc """
   Deletes a investment.
 
   ## Examples
