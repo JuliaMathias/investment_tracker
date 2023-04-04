@@ -1,9 +1,9 @@
-defmodule InvestmentTracker.CsvParsers.RendaFixa do
+defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
   @moduledoc """
   A parser for renda fixa investment CSV files, extracting relevant information
   and returning a list of maps.
   """
-  alias InvestmentTracker.CsvParsers.Utils
+  alias InvestmentTracker.CSVs.Parsers.Utils
   alias NimbleCSV.RFC4180, as: CSV
 
   @prefixes ~w(CDB CRA CRI DEBENTURE LCA LCI)

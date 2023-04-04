@@ -1,7 +1,7 @@
-defmodule InvestmentTracker.CsvParsers.UtilsTest do
+defmodule InvestmentTracker.CSVs.Parsers.UtilsTest do
   @moduledoc false
   use ExUnit.Case, async: true
-  alias InvestmentTracker.CsvParsers.Utils
+  alias InvestmentTracker.CSVs.Parsers.Utils
 
   describe "parse_date/1" do
     test "parses a date string in the format 'dd/mm/yyyy' correctly" do

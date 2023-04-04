@@ -1,8 +1,8 @@
-defmodule InvestmentTracker.CsvParsers.FundosTest do
+defmodule InvestmentTracker.CSVs.Parsers.FundosTest do
   @moduledoc false
   use ExUnit.Case, async: true
-  doctest InvestmentTracker.CsvParsers.Fundos
-  alias InvestmentTracker.CsvParsers.Fundos
+  doctest InvestmentTracker.CSVs.Parsers.Fundos
+  alias InvestmentTracker.CSVs.Parsers.Fundos
 
   test "parse_csv/1" do
     file = "priv/static/reports/fundos.csv"

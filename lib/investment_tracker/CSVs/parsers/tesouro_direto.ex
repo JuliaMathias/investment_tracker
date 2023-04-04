@@ -1,9 +1,9 @@
-defmodule InvestmentTracker.CsvParsers.TesouroDireto do
+defmodule InvestmentTracker.CSVs.Parsers.TesouroDireto do
   @moduledoc """
   A CSV parser for the Tesouro Direto investment information.
   """
 
-  alias InvestmentTracker.CsvParsers.Utils
+  alias InvestmentTracker.CSVs.Parsers.Utils
   alias NimbleCSV.RFC4180, as: CSV
 
   @spec parse_csv(String.t()) :: list(map())

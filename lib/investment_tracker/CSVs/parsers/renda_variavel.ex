@@ -1,9 +1,9 @@
-defmodule InvestmentTracker.CsvParsers.RendaVariavel do
+defmodule InvestmentTracker.CSVs.Parsers.RendaVariavel do
   @moduledoc """
   A CSV parser for Renda Variável investment information.
   """
 
-  alias InvestmentTracker.CsvParsers.Utils
+  alias InvestmentTracker.CSVs.Parsers.Utils
   alias NimbleCSV.RFC4180, as: CSV
 
   @spec parse_csv(String.t()) :: list(map())

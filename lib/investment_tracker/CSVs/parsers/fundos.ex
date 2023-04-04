@@ -1,10 +1,10 @@
-defmodule InvestmentTracker.CsvParsers.Fundos do
+defmodule InvestmentTracker.CSVs.Parsers.Fundos do
   @moduledoc """
   A module to parse CSV files for Fundos (Investment Funds) and extract relevant
   information.
   """
 
-  alias InvestmentTracker.CsvParsers.Utils
+  alias InvestmentTracker.CSVs.Parsers.Utils
   alias NimbleCSV.RFC4180, as: CSV
 
   @doc """

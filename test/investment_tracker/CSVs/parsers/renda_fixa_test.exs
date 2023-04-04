@@ -1,8 +1,8 @@
-defmodule InvestmentTracker.CsvParsers.RendaFixaTest do
+defmodule InvestmentTracker.CSVs.Parsers.RendaFixaTest do
   @moduledoc false
   use ExUnit.Case, async: true
 
-  alias InvestmentTracker.CsvParsers.RendaFixa
+  alias InvestmentTracker.CSVs.Parsers.RendaFixa
 
   test "parse_renda_fixa_csv/1" do
     file = "priv/static/reports/renda_fixa.csv"
