@@ -1,7 +1,8 @@
 defmodule InvestmentTrackerWeb.CSVControllerTest do
-  use InvestmentTrackerWeb.ConnCase
+  @moduledoc false
+  use InvestmentTrackerWeb.ConnCase, async: true
 
-  import InvestmentTracker.CSVsFixtures
+  import InvestmentTracker.Factory
 
   @create_attrs %{content: "some content", title: "some title", type: :renda_fixa}
   @update_attrs %{content: "some updated content", title: "some updated title", type: :fundos}
@@ -78,7 +79,7 @@ defmodule InvestmentTrackerWeb.CSVControllerTest do
   end
 
   defp create_csv(_) do
-    csv = csv_fixture()
+    csv = insert(:csv)
     %{csv: csv}
   end
 end

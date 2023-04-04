@@ -2,22 +2,21 @@ defmodule InvestmentTracker.CSVsTest do
   @moduledoc false
   use InvestmentTracker.DataCase, async: true
 
+  import InvestmentTracker.Factory
+
   alias InvestmentTracker.CSVs
+  alias InvestmentTracker.CSVs.CSV
 
   describe "csvs" do
-    alias InvestmentTracker.CSVs.CSV
-
-    import InvestmentTracker.CSVsFixtures
-
     @invalid_attrs %{content: nil, title: nil, type: nil}
 
     test "list_csvs/0 returns all csvs" do
-      csv = csv_fixture()
+      csv = insert(:csv)
       assert CSVs.list_csvs() == [csv]
     end
 
     test "get_csv!/1 returns the csv with given id" do
-      csv = csv_fixture()
+      csv = insert(:csv)
       assert CSVs.get_csv!(csv.id) == csv
     end
 
@@ -35,7 +34,7 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "update_csv/2 with valid data updates the csv" do
-      csv = csv_fixture()
+      csv = insert(:csv)
 
       update_attrs = %{
         content: "some updated content",
@@ -50,19 +49,19 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "update_csv/2 with invalid data returns error changeset" do
-      csv = csv_fixture()
+      csv = insert(:csv)
       assert {:error, %Ecto.Changeset{}} = CSVs.update_csv(csv, @invalid_attrs)
       assert csv == CSVs.get_csv!(csv.id)
     end
 
     test "delete_csv/1 deletes the csv" do
-      csv = csv_fixture()
+      csv = insert(:csv)
       assert {:ok, %CSV{}} = CSVs.delete_csv(csv)
       assert_raise Ecto.NoResultsError, fn -> CSVs.get_csv!(csv.id) end
     end
 
     test "change_csv/1 returns a csv changeset" do
-      csv = csv_fixture()
+      csv = insert(:csv)
       assert %Ecto.Changeset{} = CSVs.change_csv(csv)
     end
   end

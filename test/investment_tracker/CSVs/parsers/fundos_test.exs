@@ -2,12 +2,12 @@ defmodule InvestmentTracker.CSVs.Parsers.FundosTest do
   @moduledoc false
   use InvestmentTracker.DataCase, async: true
 
-  import InvestmentTracker.CSVsFixtures
+  import InvestmentTracker.Factory
 
   alias InvestmentTracker.CSVs.Parsers.Fundos
 
   test "parse_csv/1" do
-    csv = fundos_fixture()
+    csv = insert(:fundos_csv)
 
     assert Fundos.parse_csv(csv) == [
              %{

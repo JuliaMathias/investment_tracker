@@ -2,12 +2,12 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaVariavelTest do
   @moduledoc false
   use InvestmentTracker.DataCase, async: true
 
-  import InvestmentTracker.CSVsFixtures
+  import InvestmentTracker.Factory
 
   alias InvestmentTracker.CSVs.Parsers.RendaVariavel
 
   test "parse_csv/1" do
-    csv = renda_variavel_fixture()
+    csv = insert(:renda_variavel_csv)
 
     assert RendaVariavel.parse_csv(csv) == [
              %{
