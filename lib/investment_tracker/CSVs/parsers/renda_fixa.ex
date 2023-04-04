@@ -4,7 +4,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
   and returning a list of maps.
   """
   alias InvestmentTracker.CSVs.Parsers.Utils
-  alias NimbleCSV.RFC4180, as: CSV
+  alias NimbleCSV.RFC4180, as: NimbleCSV
 
   @prefixes ~w(CDB CRA CRI DEBENTURE LCA LCI)
 
@@ -30,7 +30,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
 
     file
     |> File.read!()
-    |> CSV.parse_string()
+    |> NimbleCSV.parse_string()
     |> Enum.reject(fn x ->
       first = List.first(x)
 

@@ -4,7 +4,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaVariavel do
   """
 
   alias InvestmentTracker.CSVs.Parsers.Utils
-  alias NimbleCSV.RFC4180, as: CSV
+  alias NimbleCSV.RFC4180, as: NimbleCSV
 
   @spec parse_csv(String.t()) :: list(map())
   @doc """
@@ -17,7 +17,7 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaVariavel do
   def parse_csv(file) do
     file
     |> File.read!()
-    |> CSV.parse_string()
+    |> NimbleCSV.parse_string()
     |> Enum.reject(fn x ->
       first = List.first(x)
       Enum.at(x, 3) == "" or String.starts_with?(first, ["TABLE", "Quantidade"])

@@ -4,7 +4,7 @@ defmodule InvestmentTracker.CSVs.Parsers.TesouroDireto do
   """
 
   alias InvestmentTracker.CSVs.Parsers.Utils
-  alias NimbleCSV.RFC4180, as: CSV
+  alias NimbleCSV.RFC4180, as: NimbleCSV
 
   @spec parse_csv(String.t()) :: list(map())
   @doc """
@@ -17,7 +17,7 @@ defmodule InvestmentTracker.CSVs.Parsers.TesouroDireto do
   def parse_csv(file) do
     file
     |> File.read!()
-    |> CSV.parse_string()
+    |> NimbleCSV.parse_string()
     |> Enum.reject(fn x -> List.first(x) == "" end)
     |> Enum.map(&build_map/1)
   end
