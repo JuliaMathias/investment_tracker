@@ -1,7 +1,8 @@
 defmodule InvestmentTrackerWeb.OperationControllerTest do
-  use InvestmentTrackerWeb.ConnCase
+  @moduledoc false
+  use InvestmentTrackerWeb.ConnCase, async: true
 
-  import InvestmentTracker.WalletFixtures
+  import InvestmentTracker.Factory
 
   @create_attrs %{type: :deposit, value: 42}
   @update_attrs %{type: :deposit, value: 43}
@@ -78,7 +79,7 @@ defmodule InvestmentTrackerWeb.OperationControllerTest do
   end
 
   defp create_operation(_) do
-    operation = operation_fixture()
+    operation = insert(:operation)
     %{operation: operation}
   end
 end
