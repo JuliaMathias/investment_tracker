@@ -1,7 +1,8 @@
 defmodule InvestmentTrackerWeb.InvestmentControllerTest do
-  use InvestmentTrackerWeb.ConnCase
+  @moduledoc false
+  use InvestmentTrackerWeb.ConnCase, async: true
 
-  import InvestmentTracker.WalletFixtures
+  import InvestmentTracker.Factory
 
   @create_attrs %{
     current_value: 42,
@@ -99,7 +100,7 @@ defmodule InvestmentTrackerWeb.InvestmentControllerTest do
   end
 
   defp create_investment(_) do
-    investment = investment_fixture()
+    investment = insert(:investment)
     %{investment: investment}
   end
 end

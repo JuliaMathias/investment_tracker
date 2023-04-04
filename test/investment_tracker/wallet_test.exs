@@ -2,7 +2,7 @@ defmodule InvestmentTracker.WalletTest do
   @moduledoc false
   use InvestmentTracker.DataCase, async: true
 
-  import InvestmentTracker.WalletFixtures
+  import InvestmentTracker.Factory
 
   alias InvestmentTracker.Wallet
   alias InvestmentTracker.Wallet.Investment
@@ -19,12 +19,12 @@ defmodule InvestmentTracker.WalletTest do
     }
 
     test "list_investments/0 returns all investments" do
-      investment = investment_fixture()
+      investment = insert(:investment)
       assert Wallet.list_investments() == [investment]
     end
 
     test "get_investment!/1 returns the investment with given id" do
-      investment = investment_fixture()
+      investment = insert(:investment)
       assert Wallet.get_investment!(investment.id) == investment
     end
 
@@ -67,7 +67,7 @@ defmodule InvestmentTracker.WalletTest do
     end
 
     test "update_investment/2 with invalid subtype returns error changeset" do
-      investment = investment_fixture()
+      investment = insert(:investment)
 
       update_attrs = %{
         current_value: 43,
@@ -84,7 +84,7 @@ defmodule InvestmentTracker.WalletTest do
     end
 
     test "update_investment/2 with valid data updates the investment" do
-      investment = investment_fixture()
+      investment = insert(:investment)
 
       update_attrs = %{
         current_value: 43,
@@ -107,19 +107,19 @@ defmodule InvestmentTracker.WalletTest do
     end
 
     test "update_investment/2 with invalid data returns error changeset" do
-      investment = investment_fixture()
+      investment = insert(:investment)
       assert {:error, %Ecto.Changeset{}} = Wallet.update_investment(investment, @invalid_attrs)
       assert investment == Wallet.get_investment!(investment.id)
     end
 
     test "delete_investment/1 deletes the investment" do
-      investment = investment_fixture()
+      investment = insert(:investment)
       assert {:ok, %Investment{}} = Wallet.delete_investment(investment)
       assert_raise Ecto.NoResultsError, fn -> Wallet.get_investment!(investment.id) end
     end
 
     test "change_investment/1 returns a investment changeset" do
-      investment = investment_fixture()
+      investment = insert(:investment)
       assert %Ecto.Changeset{} = Wallet.change_investment(investment)
     end
   end
@@ -128,12 +128,12 @@ defmodule InvestmentTracker.WalletTest do
     @invalid_attrs %{type: nil, value: nil}
 
     test "list_operations/0 returns all operations" do
-      operation = operation_fixture()
+      operation = insert(:operation)
       assert Wallet.list_operations() == [operation]
     end
 
     test "get_operation!/1 returns the operation with given id" do
-      operation = operation_fixture()
+      operation = insert(:operation)
       assert Wallet.get_operation!(operation.id) == operation
     end
 
@@ -150,7 +150,7 @@ defmodule InvestmentTracker.WalletTest do
     end
 
     test "update_operation/2 with valid data updates the operation" do
-      operation = operation_fixture()
+      operation = insert(:operation)
       update_attrs = %{type: :withdraw, value: 43}
 
       assert {:ok, %Operation{} = operation} = Wallet.update_operation(operation, update_attrs)
@@ -159,19 +159,19 @@ defmodule InvestmentTracker.WalletTest do
     end
 
     test "update_operation/2 with invalid data returns error changeset" do
-      operation = operation_fixture()
+      operation = insert(:operation)
       assert {:error, %Ecto.Changeset{}} = Wallet.update_operation(operation, @invalid_attrs)
       assert operation == Wallet.get_operation!(operation.id)
     end
 
     test "delete_operation/1 deletes the operation" do
-      operation = operation_fixture()
+      operation = insert(:operation)
       assert {:ok, %Operation{}} = Wallet.delete_operation(operation)
       assert_raise Ecto.NoResultsError, fn -> Wallet.get_operation!(operation.id) end
     end
 
     test "change_operation/1 returns a operation changeset" do
-      operation = operation_fixture()
+      operation = insert(:operation)
       assert %Ecto.Changeset{} = Wallet.change_operation(operation)
     end
   end

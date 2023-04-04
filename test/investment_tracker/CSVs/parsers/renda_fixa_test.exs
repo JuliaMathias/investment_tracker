@@ -2,12 +2,12 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixaTest do
   @moduledoc false
   use InvestmentTracker.DataCase, async: true
 
-  import InvestmentTracker.CSVsFixtures
+  import InvestmentTracker.Factory
 
   alias InvestmentTracker.CSVs.Parsers.RendaFixa
 
   test "parse_renda_fixa_csv/1" do
-    csv = renda_fixa_fixture()
+    csv = insert(:renda_fixa_csv)
 
     assert RendaFixa.parse_csv(csv) == [
              %{

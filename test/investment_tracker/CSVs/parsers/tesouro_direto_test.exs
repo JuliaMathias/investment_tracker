@@ -2,12 +2,12 @@ defmodule InvestmentTracker.CSVs.Parsers.TesouroDiretoTest do
   @moduledoc false
   use InvestmentTracker.DataCase, async: true
 
-  import InvestmentTracker.CSVsFixtures
+  import InvestmentTracker.Factory
 
   alias InvestmentTracker.CSVs.Parsers.TesouroDireto
 
   test "parse_csv/1" do
-    csv = tesouro_direto_fixture()
+    csv = insert(:tesouro_direto_csv)
 
     assert TesouroDireto.parse_csv(csv) == [
              %{
