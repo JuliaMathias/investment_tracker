@@ -35,6 +35,7 @@ defmodule InvestmentTracker.Wallet.Investment do
     investment
     |> cast(attrs, [:name, :type, :subtype, :initial_value, :current_value, :expiration_date])
     |> validate_required([:name, :type, :initial_value, :current_value])
+    |> unique_constraint(:name)
     |> validate_subtype()
   end
 

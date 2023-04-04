@@ -10,7 +10,7 @@ defmodule InvestmentTracker.Factory.Wallet do
           current_value: 42,
           expiration_date: ~D[2023-03-27],
           initial_value: 42,
-          name: "some name",
+          name: "some name #{Enum.random(?a..?z)}",
           subtype: :cdb,
           type: :renda_fixa
         }
