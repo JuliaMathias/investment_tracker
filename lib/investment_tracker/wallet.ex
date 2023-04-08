@@ -4,9 +4,10 @@ defmodule InvestmentTracker.Wallet do
   """
 
   import Ecto.Query, warn: false
-  alias InvestmentTracker.Repo
 
+  alias InvestmentTracker.Repo
   alias InvestmentTracker.Wallet.Investment
+  alias InvestmentTracker.Wallet.InvestmentHistory
 
   @doc """
   Returns the list of investments.
@@ -49,10 +50,20 @@ defmodule InvestmentTracker.Wallet do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_investment(map()) :: {:ok, Investment.t()} | {:error, Ecto.Changeset.t()}
   def create_investment(attrs \\ %{}) do
-    %Investment{}
-    |> Investment.changeset(attrs)
-    |> Repo.insert()
+    with %{valid?: true} = changeset <- Investment.changeset(%Investment{}, attrs),
+         {:ok, investment} <- Repo.insert(changeset),
+         {:ok, _investment_history} <-
+           create_investment_history(%{
+             investment_id: investment.id,
+             value: investment.current_value
+           }) do
+      {:ok, investment}
+    else
+      {:error, changeset} -> {:error, changeset}
+      changeset -> {:error, changeset}
+    end
   end
 
   @doc """
@@ -67,10 +78,21 @@ defmodule InvestmentTracker.Wallet do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec update_investment(Investment.t(), map()) ::
+          {:ok, Investment.t()} | {:error, Ecto.Changeset.t()}
   def update_investment(%Investment{} = investment, attrs) do
-    investment
-    |> Investment.changeset(attrs)
-    |> Repo.update()
+    with %{valid?: true} = changeset <- Investment.changeset(investment, attrs),
+         {:ok, investment} <- Repo.update(changeset),
+         {:ok, _investment_history} <-
+           create_investment_history(%{
+             investment_id: investment.id,
+             value: investment.current_value
+           }) do
+      {:ok, investment}
+    else
+      {:error, changeset} -> {:error, changeset}
+      changeset -> {:error, changeset}
+    end
   end
 
   @doc """
@@ -252,5 +274,57 @@ defmodule InvestmentTracker.Wallet do
   """
   def change_operation(%Operation{} = operation, attrs \\ %{}) do
     Operation.changeset(operation, attrs)
+  end
+
+  @doc """
+  Returns the list of investment_histories for a given investment.
+
+  ## Examples
+
+  iex> list_histories_for_investment(investment_id)
+  [%InvestmentHistory{}, ...]
+
+  """
+  @spec list_histories_for_investment(String.t()) :: [InvestmentHistory.t()]
+  def list_histories_for_investment(investment_id) do
+    Repo.all(from ih in InvestmentHistory, where: ih.investment_id == ^investment_id)
+  end
+
+  @doc """
+  Creates a investment_history.
+
+  ## Examples
+
+  iex> create_investment_history(%{field: value})
+  {:ok, %InvestmentHistory{}}
+
+  iex> create_investment_history(%{field: bad_value})
+  {:error, %Ecto.Changeset{}}
+
+  """
+  @spec create_investment_history(map) ::
+          {:ok, InvestmentHistory.t()} | {:error, Ecto.Changeset.t()}
+  def create_investment_history(attrs \\ %{}) do
+    %InvestmentHistory{}
+    |> InvestmentHistory.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Deletes a investment_history.
+
+  ## Examples
+
+  iex> delete_investment_history(investment_history)
+  {:ok, %InvestmentHistory{}}
+
+  iex> delete_investment_history(investment_history)
+  {:error, %Ecto.Changeset{}}
+
+  """
+  @spec delete_investment_history(InvestmentHistory.t()) ::
+          {:ok, InvestmentHistory.t()} | {:error, Ecto.Changeset.t()}
+  def delete_investment_history(%InvestmentHistory{} = investment_history) do
+    Repo.delete(investment_history)
   end
 end

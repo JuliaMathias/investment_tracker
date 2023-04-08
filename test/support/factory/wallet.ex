@@ -1,6 +1,7 @@
 defmodule InvestmentTracker.Factory.Wallet do
   @moduledoc false
   alias InvestmentTracker.Wallet.Investment
+  alias InvestmentTracker.Wallet.InvestmentHistory
   alias InvestmentTracker.Wallet.Operation
 
   defmacro __using__(_opts) do
@@ -23,6 +24,18 @@ defmodule InvestmentTracker.Factory.Wallet do
         %Operation{
           id: Ecto.UUID.generate(),
           type: :deposit,
+          value: 42,
+          investment_id: investment.id
+        }
+        |> merge_attributes(attrs)
+        |> evaluate_lazy_attributes()
+      end
+
+      def investment_history_factory(attrs \\ %{}) do
+        {investment, attrs} = Map.pop(attrs, :investment, build(:investment))
+
+        %InvestmentHistory{
+          id: Ecto.UUID.generate(),
           value: 42,
           investment_id: investment.id
         }

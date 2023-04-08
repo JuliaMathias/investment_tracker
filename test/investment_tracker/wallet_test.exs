@@ -4,8 +4,10 @@ defmodule InvestmentTracker.WalletTest do
 
   import InvestmentTracker.Factory
 
+  alias InvestmentTracker.Repo
   alias InvestmentTracker.Wallet
   alias InvestmentTracker.Wallet.Investment
+  alias InvestmentTracker.Wallet.InvestmentHistory
   alias InvestmentTracker.Wallet.Operation
 
   setup do
@@ -30,7 +32,7 @@ defmodule InvestmentTracker.WalletTest do
       assert Wallet.get_investment!(investment.id) == investment
     end
 
-    test "create_investment/1 with valid data creates a investment" do
+    test "create_investment/1 with valid data creates a investment and investment history" do
       valid_attrs = %{
         current_value: 42,
         expiration_date: ~D[2023-03-27],
@@ -41,12 +43,16 @@ defmodule InvestmentTracker.WalletTest do
       }
 
       assert {:ok, %Investment{} = investment} = Wallet.create_investment(valid_attrs)
+      investment_id = investment.id
       assert investment.current_value == 42
       assert investment.expiration_date == ~D[2023-03-27]
       assert investment.initial_value == 42
       assert investment.name == "some name"
       assert investment.subtype == :multimercado
       assert investment.type == :fundos
+
+      assert %InvestmentHistory{investment_id: ^investment_id, value: 42} =
+               Repo.get_by(InvestmentHistory, investment_id: investment_id)
     end
 
     test "create_investment/1 with invalid data returns error changeset" do
@@ -85,25 +91,30 @@ defmodule InvestmentTracker.WalletTest do
       assert %{subtype: ["is invalid for the selected type"]} = errors_on(changeset)
     end
 
-    test "update_investment/2 with valid data updates the investment", %{investment: investment} do
+    test "update_investment/2 with valid data updates the investment and creates investment history",
+         %{investment: investment} do
       update_attrs = %{
-        current_value: 43,
+        current_value: 103,
         expiration_date: ~D[2023-03-28],
-        initial_value: 43,
         name: "some updated name",
         subtype: :lci_lca,
         type: :renda_fixa
       }
 
+      refute investment.current_value == 103
+
       assert {:ok, %Investment{} = investment} =
                Wallet.update_investment(investment, update_attrs)
 
-      assert investment.current_value == 43
+      investment_id = investment.id
+      assert investment.current_value == 103
       assert investment.expiration_date == ~D[2023-03-28]
-      assert investment.initial_value == 43
       assert investment.name == "some updated name"
       assert investment.subtype == :lci_lca
       assert investment.type == :renda_fixa
+
+      assert %InvestmentHistory{investment_id: ^investment_id, value: 103} =
+               Repo.get_by(InvestmentHistory, investment_id: investment_id)
     end
 
     test "update_investment/2 with invalid data returns error changeset", %{
@@ -226,6 +237,68 @@ defmodule InvestmentTracker.WalletTest do
       assert unchanged_investment.current_value == 1000
 
       refute_received({InvestmentTracker.Repo, :insert, [%Operation{}]})
+    end
+  end
+
+  describe "investment_histories" do
+    @invalid_attrs %{value: nil}
+
+    test "list_histories_for_investment/1 returns all investment_histories for the given investment" do
+      valid_attrs = %{
+        current_value: 42,
+        expiration_date: ~D[2023-03-27],
+        initial_value: 42,
+        name: "some name",
+        subtype: :multimercado,
+        type: :fundos
+      }
+
+      {:ok, %{id: investment_id} = investment} = Wallet.create_investment(valid_attrs)
+
+      update_attrs = %{
+        current_value: 103,
+        expiration_date: ~D[2023-03-28],
+        name: "some updated name",
+        subtype: :lci_lca,
+        type: :renda_fixa
+      }
+
+      Wallet.update_investment(investment, update_attrs)
+
+      assert [
+               %InvestmentTracker.Wallet.InvestmentHistory{
+                 value: 42,
+                 investment_id: ^investment_id
+               },
+               %InvestmentTracker.Wallet.InvestmentHistory{
+                 value: 103,
+                 investment_id: ^investment_id
+               }
+             ] = Wallet.list_histories_for_investment(investment_id)
+    end
+
+    test "create_investment_history/1 with valid data creates a investment_history" do
+      investment = insert(:investment)
+      valid_attrs = %{value: 42, investment_id: investment.id}
+
+      assert {:ok, %InvestmentHistory{} = investment_history} =
+               Wallet.create_investment_history(valid_attrs)
+
+      assert investment_history.value == 42
+    end
+
+    test "create_investment_history/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Wallet.create_investment_history(@invalid_attrs)
+    end
+
+    test "delete_investment_history/1 deletes the investment_history" do
+      investment = insert(:investment)
+      investment_history = insert(:investment_history, investment: investment)
+      assert {:ok, %InvestmentHistory{}} = Wallet.delete_investment_history(investment_history)
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Repo.get!(InvestmentHistory, investment_history.id)
+      end
     end
   end
 end
