@@ -8,6 +8,7 @@ defmodule InvestmentTracker.Wallet do
   alias InvestmentTracker.Repo
   alias InvestmentTracker.Wallet.Investment
   alias InvestmentTracker.Wallet.InvestmentHistory
+  alias InvestmentTracker.Wallet.Operation
 
   @doc """
   Returns the list of investments.
@@ -18,6 +19,7 @@ defmodule InvestmentTracker.Wallet do
       [%Investment{}, ...]
 
   """
+  @spec list_investments() :: list(Investment.t())
   def list_investments do
     Repo.all(Investment)
   end
@@ -36,6 +38,7 @@ defmodule InvestmentTracker.Wallet do
       ** (Ecto.NoResultsError)
 
   """
+  @spec get_investment!(integer()) :: Investment.t()
   def get_investment!(id), do: Repo.get!(Investment, id)
 
   @doc """
@@ -163,6 +166,7 @@ defmodule InvestmentTracker.Wallet do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec delete_investment(Investment.t()) :: {:ok, Investment.t()} | {:error, Ecto.Changeset.t()}
   def delete_investment(%Investment{} = investment) do
     Repo.delete(investment)
   end
@@ -172,25 +176,25 @@ defmodule InvestmentTracker.Wallet do
 
   ## Examples
 
-      iex> change_investment(investment)
-      %Ecto.Changeset{data: %Investment{}}
+  iex> change_investment(investment)
+  %Ecto.Changeset{data: %Investment{}}
 
   """
+  @spec change_investment(map, map) :: Ecto.Changeset.t()
   def change_investment(%Investment{} = investment, attrs \\ %{}) do
     Investment.changeset(investment, attrs)
   end
-
-  alias InvestmentTracker.Wallet.Operation
 
   @doc """
   Returns the list of operations.
 
   ## Examples
 
-      iex> list_operations()
-      [%Operation{}, ...]
+  iex> list_operations()
+  [%Operation{}, ...]
 
   """
+  @spec list_operations :: [Operation.t()]
   def list_operations do
     Repo.all(Operation)
   end
@@ -202,13 +206,14 @@ defmodule InvestmentTracker.Wallet do
 
   ## Examples
 
-      iex> get_operation!(123)
-      %Operation{}
+  iex> get_operation!(123)
+  %Operation{}
 
-      iex> get_operation!(456)
-      ** (Ecto.NoResultsError)
+  iex> get_operation!(456)
+  ** (Ecto.NoResultsError)
 
   """
+  @spec get_operation!(String.t()) :: Operation.t()
   def get_operation!(id), do: Repo.get!(Operation, id)
 
   @doc """
@@ -216,13 +221,14 @@ defmodule InvestmentTracker.Wallet do
 
   ## Examples
 
-      iex> create_operation(%{field: value})
-      {:ok, %Operation{}}
+  iex> create_operation(%{field: value})
+  {:ok, %Operation{}}
 
-      iex> create_operation(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
+  iex> create_operation(%{field: bad_value})
+  {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_operation(map) :: {:ok, Operation.t()} | {:error, Ecto.Changeset.t()}
   def create_operation(attrs \\ %{}) do
     %Operation{}
     |> Operation.changeset(attrs)
@@ -234,13 +240,15 @@ defmodule InvestmentTracker.Wallet do
 
   ## Examples
 
-      iex> update_operation(operation, %{field: new_value})
-      {:ok, %Operation{}}
+  iex> update_operation(operation, %{field: new_value})
+  {:ok, %Operation{}}
 
-      iex> update_operation(operation, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
+  iex> update_operation(operation, %{field: bad_value})
+  {:error, %Ecto.Changeset{}}
 
   """
+  @spec update_operation(Operation.t(), map) ::
+          {:ok, Operation.t()} | {:error, Ecto.Changeset.t()}
   def update_operation(%Operation{} = operation, attrs) do
     operation
     |> Operation.changeset(attrs)
@@ -252,13 +260,13 @@ defmodule InvestmentTracker.Wallet do
 
   ## Examples
 
-      iex> delete_operation(operation)
-      {:ok, %Operation{}}
+  iex> delete_operation(operation)
+  {:ok, %Operation{}}
 
-      iex> delete_operation(operation)
-      {:error, %Ecto.Changeset{}}
-
+  iex> delete_operation(operation)
+  {:error, %Ecto.Changeset{}}
   """
+  @spec delete_operation(Operation.t()) :: {:ok, Operation.t()} | {:error, Ecto.Changeset.t()}
   def delete_operation(%Operation{} = operation) do
     Repo.delete(operation)
   end
@@ -268,10 +276,11 @@ defmodule InvestmentTracker.Wallet do
 
   ## Examples
 
-      iex> change_operation(operation)
-      %Ecto.Changeset{data: %Operation{}}
+  iex> change_operation(operation)
+  %Ecto.Changeset{data: %Operation{}}
 
   """
+  @spec change_operation(map, map) :: Ecto.Changeset.t()
   def change_operation(%Operation{} = operation, attrs \\ %{}) do
     Operation.changeset(operation, attrs)
   end
