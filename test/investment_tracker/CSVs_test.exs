@@ -526,5 +526,275 @@ defmodule InvestmentTracker.CSVsTest do
 
       assert [_csv1, _csv2] = Repo.all(CSV)
     end
+
+    test "import_csv/1 successfully imports investments from a renda fixa CSV" do
+      attrs = params_for(:renda_fixa_csv)
+
+      assert {
+               :ok,
+               [
+                 ok: %Investment{
+                   current_value: 336_524,
+                   id: id_1,
+                   initial_value: 311_729,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_1,
+                       value: 336_524
+                     }
+                   ],
+                   name: "LCI MNO",
+                   subtype: :lci_lca,
+                   type: :renda_fixa,
+                   expiration_date: ~D[2023-08-11]
+                 },
+                 ok: %Investment{
+                   current_value: 329_238,
+                   id: id_2,
+                   initial_value: 311_214,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_2,
+                       value: 329_238
+                     }
+                   ],
+                   name: "LCA XYZ",
+                   subtype: :lci_lca,
+                   type: :renda_fixa,
+                   expiration_date: ~D[2023-08-12]
+                 },
+                 ok: %Investment{
+                   current_value: 573_425,
+                   id: id_3,
+                   initial_value: 557_361,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_3,
+                       value: 573_425
+                     }
+                   ],
+                   name: "DEBENTURE LIGHB6",
+                   subtype: :debentures,
+                   type: :renda_fixa,
+                   expiration_date: ~D[2025-10-17]
+                 },
+                 ok: %Investment{
+                   current_value: 203_456,
+                   id: id_4,
+                   initial_value: 290_034,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_4,
+                       value: 203_456
+                     }
+                   ],
+                   name: "CRI STRAIGHTS175E2",
+                   subtype: :cri_cra,
+                   type: :renda_fixa,
+                   expiration_date: ~D[2024-11-20]
+                 },
+                 ok: %Investment{
+                   current_value: 112_830,
+                   id: id_5,
+                   initial_value: 107_825,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_5,
+                       value: 112_830
+                     }
+                   ],
+                   name: "CRA GREEN130S2",
+                   subtype: :cri_cra,
+                   type: :renda_fixa,
+                   expiration_date: ~D[2029-07-17]
+                 },
+                 ok: %Investment{
+                   current_value: 1_231_149,
+                   id: id_6,
+                   initial_value: 1_200_000,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_6,
+                       value: 1_231_149
+                     }
+                   ],
+                   name: "CDB LIMIT PLUS",
+                   subtype: :cdb,
+                   type: :renda_fixa,
+                   expiration_date: ~D[2026-01-01]
+                 },
+                 ok: %Investment{
+                   current_value: 121_921,
+                   id: id_7,
+                   initial_value: 105_000,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_7,
+                       value: 121_921
+                     }
+                   ],
+                   name: "CDB YZC",
+                   subtype: :cdb,
+                   type: :renda_fixa,
+                   expiration_date: ~D[2024-01-01]
+                 }
+               ]
+             } = CSVs.import_csv(attrs)
+
+      assert [_csv] = Repo.all(CSV)
+    end
+
+    test "import_csv/1 successfully imports investments from a renda variavel CSV" do
+      attrs = params_for(:renda_variavel_csv)
+
+      assert {
+               :ok,
+               [
+                 ok: %Investment{
+                   current_value: 60_450,
+                   id: id_1,
+                   initial_value: 63_300,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_1,
+                       value: 60_450
+                     }
+                   ],
+                   name: "ANON01",
+                   subtype: :fiis,
+                   type: :renda_variavel
+                 },
+                 ok: %Investment{
+                   current_value: 44_000,
+                   id: id_2,
+                   initial_value: 52_000,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_2,
+                       value: 44_000
+                     }
+                   ],
+                   name: "ANON02",
+                   subtype: :fiis,
+                   type: :renda_variavel
+                 },
+                 ok: %Investment{
+                   current_value: 56_000,
+                   id: id_3,
+                   initial_value: 62_400,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_3,
+                       value: 56_000
+                     }
+                   ],
+                   name: "ANON03",
+                   subtype: :fiis,
+                   type: :renda_variavel
+                 },
+                 ok: %Investment{
+                   current_value: 49_350,
+                   id: id_4,
+                   initial_value: 56_700,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_4,
+                       value: 49_350
+                     }
+                   ],
+                   name: "ANON04",
+                   subtype: :fiis,
+                   type: :renda_variavel
+                 },
+                 ok: %Investment{
+                   current_value: 58_800,
+                   id: id_5,
+                   initial_value: 59_500,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_5,
+                       value: 58_800
+                     }
+                   ],
+                   name: "ANON05",
+                   subtype: :fiis,
+                   type: :renda_variavel
+                 },
+                 ok: %Investment{
+                   current_value: 51_000,
+                   id: id_6,
+                   initial_value: 60_600,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_6,
+                       value: 51_000
+                     }
+                   ],
+                   name: "ANON06",
+                   subtype: :fiis,
+                   type: :renda_variavel
+                 }
+               ]
+             } = CSVs.import_csv(attrs)
+
+      assert [_csv] = Repo.all(CSV)
+    end
+
+    test "import_csv/1 successfully imports investments from a tesouro direto CSV" do
+      attrs = params_for(:tesouro_direto_csv)
+
+      assert {
+               :ok,
+               [
+                 ok: %Investment{
+                   current_value: 2_676_504,
+                   id: id_1,
+                   initial_value: 2_443_023,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_1,
+                       value: 2_676_504
+                     }
+                   ],
+                   name: "Tesouro Selic 2025",
+                   subtype: :selic,
+                   type: :tesouro_direto,
+                   expiration_date: ~D[2025-03-01]
+                 },
+                 ok: %Investment{
+                   current_value: 3_490_543,
+                   id: id_2,
+                   initial_value: 3_123_456,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_2,
+                       value: 3_490_543
+                     }
+                   ],
+                   name: "Tesouro Prefixado 2029",
+                   subtype: :prefixado,
+                   type: :tesouro_direto,
+                   expiration_date: ~D[2029-12-01]
+                 },
+                 ok: %Investment{
+                   current_value: 6_123_456,
+                   id: id_3,
+                   initial_value: 5_543_212,
+                   investment_histories: [
+                     %InvestmentHistory{
+                       investment_id: id_3,
+                       value: 6_123_456
+                     }
+                   ],
+                   name: "Tesouro IPCA+ Com Juros Semestrais 2032",
+                   subtype: :ipca,
+                   type: :tesouro_direto,
+                   expiration_date: ~D[2032-08-15]
+                 }
+               ]
+             } = CSVs.import_csv(attrs)
+
+      assert [_csv] = Repo.all(CSV)
+    end
   end
 end
