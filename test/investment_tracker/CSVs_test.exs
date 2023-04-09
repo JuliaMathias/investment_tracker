@@ -76,7 +76,7 @@ defmodule InvestmentTracker.CSVsTest do
       assert {
                :ok,
                [
-                 %InvestmentTracker.CSVs.CSV{
+                 %CSV{
                    content: ^content,
                    title: "Fundos",
                    type: :fundos,
@@ -252,7 +252,7 @@ defmodule InvestmentTracker.CSVsTest do
       assert {
                :ok,
                [
-                 %InvestmentTracker.CSVs.CSV{
+                 %CSV{
                    content: ^content,
                    title: "Fundos",
                    type: :fundos,
@@ -469,7 +469,7 @@ defmodule InvestmentTracker.CSVsTest do
       assert {
                :ok,
                [
-                 %InvestmentTracker.CSVs.CSV{
+                 %CSV{
                    content: ^content,
                    title: "Renda Fixa",
                    type: :renda_fixa,
@@ -592,7 +592,7 @@ defmodule InvestmentTracker.CSVsTest do
       assert {
                :ok,
                [
-                 %InvestmentTracker.CSVs.CSV{
+                 %CSV{
                    content: ^content,
                    title: "Renda Variável",
                    type: :renda_variavel,
@@ -694,7 +694,7 @@ defmodule InvestmentTracker.CSVsTest do
       assert {
                :ok,
                [
-                 %InvestmentTracker.CSVs.CSV{
+                 %CSV{
                    content: ^content,
                    title: "Tesouro Direto",
                    type: :tesouro_direto,

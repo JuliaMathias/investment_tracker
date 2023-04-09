@@ -113,7 +113,7 @@ defmodule InvestmentTracker.CSVs do
     {:ok, [%Investment{}]} on success or {:error, %Ecto.Changeset{}} on failure.
   """
   @spec import_csv(map()) ::
-          {:ok, [{:ok, Investment.t()} | {:ok, {:updated, Investment.t()}}]}
+          {:ok, [CSV.t() | {:ok, Investment.t()} | {:ok, {:updated, Investment.t()}}]}
           | {:error, Ecto.Changeset.t()}
   def import_csv(attrs \\ %{}) do
     with {:ok, csv} <- create_csv(attrs),
