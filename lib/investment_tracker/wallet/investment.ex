@@ -17,6 +17,21 @@ defmodule InvestmentTracker.Wallet.Investment do
   @renda_variavel ~w(fiis)a
   @subtypes @renda_fixa ++ @fundos ++ @tesouro_direto ++ @renda_variavel
 
+  @typedoc """
+  Type representing the Investment struct.
+  """
+  @type t :: %__MODULE__{
+          id: binary(),
+          current_value: integer(),
+          expiration_date: Date.t() | nil,
+          initial_value: integer(),
+          name: String.t(),
+          subtype: atom(),
+          type: atom(),
+          investment_histories: [InvestmentTracker.Wallet.InvestmentHistory.t()] | nil,
+          operations: [InvestmentTracker.Wallet.Operation.t()] | nil
+        }
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "investments" do
@@ -27,6 +42,9 @@ defmodule InvestmentTracker.Wallet.Investment do
     field :subtype, Ecto.Enum, values: @subtypes
     field :type, Ecto.Enum, values: @types
 
+    has_many :investment_histories, InvestmentTracker.Wallet.InvestmentHistory
+    has_many :operations, InvestmentTracker.Wallet.Operation
+
     timestamps()
   end
 
@@ -35,6 +53,7 @@ defmodule InvestmentTracker.Wallet.Investment do
     investment
     |> cast(attrs, [:name, :type, :subtype, :initial_value, :current_value, :expiration_date])
     |> validate_required([:name, :type, :initial_value, :current_value])
+    |> unique_constraint(:name)
     |> validate_subtype()
   end
 

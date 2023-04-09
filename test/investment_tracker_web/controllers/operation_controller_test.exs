@@ -4,9 +4,16 @@ defmodule InvestmentTrackerWeb.OperationControllerTest do
 
   import InvestmentTracker.Factory
 
-  @create_attrs %{type: :deposit, value: 42}
-  @update_attrs %{type: :deposit, value: 43}
-  @invalid_attrs %{type: nil, value: nil}
+  @investment_id Ecto.UUID.generate()
+  @create_attrs %{type: :deposit, value: 42, investment_id: @investment_id}
+  @update_attrs %{type: :deposit, value: 43, investment_id: @investment_id}
+  @invalid_attrs %{type: nil, value: nil, investment_id: @investment_id}
+
+  setup do
+    insert(:investment, id: @investment_id)
+
+    :ok
+  end
 
   describe "index" do
     test "lists all operations", %{conn: conn} do
@@ -79,7 +86,8 @@ defmodule InvestmentTrackerWeb.OperationControllerTest do
   end
 
   defp create_operation(_) do
-    operation = insert(:operation)
+    investment = insert(:investment)
+    operation = insert(:operation, investment: investment)
     %{operation: operation}
   end
 end
