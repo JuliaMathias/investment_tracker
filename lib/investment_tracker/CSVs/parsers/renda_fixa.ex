@@ -43,7 +43,16 @@ defmodule InvestmentTracker.CSVs.Parsers.RendaFixa do
 
   # Builds a map with investment data.
   defp build_map([[name], [_, current, initial] | rest]) do
-    date_string = rest |> List.last() |> Enum.at(2)
+    date_string =
+      if List.last(rest) == [] do
+        rest
+        |> Enum.at(-2)
+        |> Enum.at(2)
+      else
+        rest
+        |> List.last()
+        |> Enum.at(2)
+      end
 
     initial_value_regex = ~r/Valor Aplicado Total: R\$ ([\d\.]+,[\d]+)/
     current_value_regex = ~r/Valor Líquido Total: R\$ ([\d\.]+,[\d]+)/
