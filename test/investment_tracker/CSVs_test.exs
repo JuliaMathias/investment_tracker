@@ -71,11 +71,17 @@ defmodule InvestmentTracker.CSVsTest do
 
   describe "import csv" do
     test "import_csv/1 successfully imports investments from a fundos CSV" do
-      attrs = params_for(:fundos_csv)
+      attrs = %{content: content} = params_for(:fundos_csv)
 
       assert {
                :ok,
                [
+                 %InvestmentTracker.CSVs.CSV{
+                   content: ^content,
+                   title: "Fundos",
+                   type: :fundos,
+                   imported?: true
+                 },
                  {:ok,
                   %Investment{
                     id: id_1,
@@ -246,6 +252,12 @@ defmodule InvestmentTracker.CSVsTest do
       assert {
                :ok,
                [
+                 %InvestmentTracker.CSVs.CSV{
+                   content: ^content,
+                   title: "Fundos",
+                   type: :fundos,
+                   imported?: true
+                 },
                  {:ok,
                   {:updated,
                    %Investment{
@@ -452,11 +464,17 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "import_csv/1 successfully imports investments from a renda fixa CSV" do
-      attrs = params_for(:renda_fixa_csv)
+      attrs = %{content: content} = params_for(:renda_fixa_csv)
 
       assert {
                :ok,
                [
+                 %InvestmentTracker.CSVs.CSV{
+                   content: ^content,
+                   title: "Renda Fixa",
+                   type: :renda_fixa,
+                   imported?: true
+                 },
                  ok: %Investment{
                    current_value: 336_524,
                    id: id_1,
@@ -569,11 +587,17 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "import_csv/1 successfully imports investments from a renda variavel CSV" do
-      attrs = params_for(:renda_variavel_csv)
+      attrs = %{content: content} = params_for(:renda_variavel_csv)
 
       assert {
                :ok,
                [
+                 %InvestmentTracker.CSVs.CSV{
+                   content: ^content,
+                   title: "Renda Variável",
+                   type: :renda_variavel,
+                   imported?: true
+                 },
                  ok: %Investment{
                    current_value: 60_450,
                    id: id_1,
@@ -665,11 +689,17 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "import_csv/1 successfully imports investments from a tesouro direto CSV" do
-      attrs = params_for(:tesouro_direto_csv)
+      attrs = %{content: content} = params_for(:tesouro_direto_csv)
 
       assert {
                :ok,
                [
+                 %InvestmentTracker.CSVs.CSV{
+                   content: ^content,
+                   title: "Tesouro Direto",
+                   type: :tesouro_direto,
+                   imported?: true
+                 },
                  ok: %Investment{
                    current_value: 2_676_504,
                    id: id_1,

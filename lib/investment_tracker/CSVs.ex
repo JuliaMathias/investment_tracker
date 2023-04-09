@@ -117,10 +117,13 @@ defmodule InvestmentTracker.CSVs do
           | {:error, Ecto.Changeset.t()}
   def import_csv(attrs \\ %{}) do
     with {:ok, csv} <- create_csv(attrs),
-         investment_maps <- parse_csv(csv) do
-      Repo.transaction(fn ->
-        Enum.map(investment_maps, fn map -> Wallet.upsert_investment(map) end)
-      end)
+         investment_maps <- parse_csv(csv),
+         {:ok, result} <-
+           Repo.transaction(fn ->
+             Enum.map(investment_maps, fn map -> Wallet.upsert_investment(map) end)
+           end),
+         {:ok, csv} <- update_csv(csv, %{imported?: true}) do
+      {:ok, [csv | result]}
     end
   end
 
