@@ -4,7 +4,8 @@ defmodule InvestmentTrackerWeb.CSVControllerTest do
 
   import InvestmentTracker.Factory
 
-  @create_attrs %{content: "some content", title: "some title", type: :renda_fixa}
+  alias InvestmentTracker.CSVs
+
   @update_attrs %{content: "some updated content", title: "some updated title", type: :fundos}
   @invalid_attrs %{content: nil, title: nil, type: nil}
 
@@ -23,14 +24,41 @@ defmodule InvestmentTrackerWeb.CSVControllerTest do
   end
 
   describe "create csv" do
-    test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/csvs", csv: @create_attrs)
+    test "renders import template with imported data when data is valid", %{conn: conn} do
+      attrs = params_for(:fundos_csv)
 
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == ~p"/csvs/#{id}"
+      # create investments
 
-      conn = get(conn, ~p"/csvs/#{id}")
-      assert html_response(conn, 200) =~ "Csv #{id}"
+      CSVs.import_csv(attrs)
+
+      # update investments
+
+      update_attrs = %{title: title} = params_for(:update_fundos_csv)
+
+      conn = post(conn, ~p"/csvs", csv: update_attrs)
+
+      assert html_response(conn, 200) =~ "Csv #{title}"
+
+      assert html_response(conn, 200) =~ "Investments"
+      assert html_response(conn, 200) =~ "ANON ACCESS ABC CAPITAL FIM"
+      assert html_response(conn, 200) =~ "DAICHI KARAZUNO FIC FIM CP"
+      assert html_response(conn, 200) =~ "ANON ACCESS TRIGONOMETRY BS FIC FIM"
+      assert html_response(conn, 200) =~ "CALIFORNIAN WHATEVER US INDEX 500 FIM"
+      assert html_response(conn, 200) =~ "ANON RENDA AMAZING FIRF LP"
+      assert html_response(conn, 200) =~ "CUTE HAMTARO STH FIC FIM"
+      assert html_response(conn, 200) =~ "ANON RENDA FIRF CP"
+      assert html_response(conn, 200) =~ "ANON RARE FIRF CP"
+      assert html_response(conn, 200) =~ "ANON SELECTION MULTIESTRATEGIA FIC FIM"
+      assert html_response(conn, 200) =~ "ALPHA OMEGA GLOBAL FIC FIM"
+
+      assert html_response(conn, 200) =~ "Investment Histories"
+      assert html_response(conn, 200) =~ "689292"
+      assert html_response(conn, 200) =~ "699292"
+
+      assert html_response(conn, 200) =~ "Operations"
+
+      assert html_response(conn, 200) =~ "10000"
+      assert html_response(conn, 200) =~ "-500"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do

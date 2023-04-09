@@ -71,11 +71,17 @@ defmodule InvestmentTracker.CSVsTest do
 
   describe "import csv" do
     test "import_csv/1 successfully imports investments from a fundos CSV" do
-      attrs = params_for(:fundos_csv)
+      attrs = %{content: content} = params_for(:fundos_csv)
 
       assert {
                :ok,
                [
+                 %CSV{
+                   content: ^content,
+                   title: "Fundos",
+                   type: :fundos,
+                   imported?: true
+                 },
                  {:ok,
                   %Investment{
                     id: id_1,
@@ -241,87 +247,17 @@ defmodule InvestmentTracker.CSVsTest do
 
       # update investments
 
-      content = """
-      "","","","","","","",""
-      "TABLE 1","","","","","","",""
-      "","","","","","","",""
-      "","","","ANON ACCESS","ABC CAPITAL","FIM","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "01/01/2023","5108.42276296","R $ 1,36241335","R $ 6.469,65","R $ 6.959,78","R $ 66,86","R $ 0,00","R $ 6.992,92"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 2","","","","","","",""
-      "","","","","","","",""
-      "","","","DAICHI KARAZUNO","FIC FIM CP","","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "01/01/2023","3574.40272981","R $ 1,40170440","R $ 5.000,00","R $ 5.010,26","R $ 2,30","R $ 0,00","R $ 5.002,96"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 3","","","","","","",""
-      "","","","","","","",""
-      "","","","ANON ACCESS","TRIGONOMETRY BS FIC","FIM","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "03/12/2022","1599.12639086","R $ 1,26813128","R $ 2.000,00","R $ 2.027,90","R $ 6,27","R $ 0,00","R $ 2.421,63"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 4","","","","","","",""
-      "","","","","","","",""
-      "","","","CALIFORNIAN WHATEVER","US INDEX 500 FIM","","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "03/12/2022","1093.6281063","R $ 4,77489460","R $ 5.387,99","R $ 5.221,96","R $ 0,00","R $ 0,00","R $ 5.211,96"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 5","","","","","","",""
-      "","","","","","","",""
-      "","","","ANON RENDA","AMAZING FIRF","LP","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "03/12/2022","15.73414415","R $ 3,63290045","R $ 57,02","R $ 57,16","R $ 0,00","R $ 0,11","R $ 77,05"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 6","","","","","","",""
-      "","","","","","","",""
-      "","","","CUTE HAMTARO","STH FIC FIM","","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "03/12/2022","14.35224537","R $ 361,41645460","R $ 4.949,86","R $ 5.187,14","R $ 0,00","R $ 0,00","R $ 5.187,14"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 7","","","","","","",""
-      "","","","","","","",""
-      "","","","ANON","RENDA FIRF CP","","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "03/12/2022","774.37288715","R $ 1,96464388","R $ 1.500,00","R $ 1.521,37","R $ 4,80","R $ 0,00","R $ 1.518,57"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 8","","","","","","",""
-      "","","","","","","",""
-      "","","","ANON","RARE FIRF CP","","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "03/12/2022","7988.18764326","R $ 1,26025674","R $ 10.000,00","R $ 10.067,17","R $ 9,67","R $ 24,18","R $ 12.033,32"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 9","","","","","","",""
-      "","","","","","","",""
-      "","","","ANON SELECTION","MULTIESTRATEGIA","FIC FIM","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "21/02/2022","582.76385774","R $ 1,16695240","R $ 699,90","R $ 680,06","R $ 0,00","R $ 0,00","R $ 680,06"
-      "","","","","","","",""
-      "","","","","","","",""
-      "TABLE 10","","","","","","",""
-      "","","","","","","",""
-      "","","","ALPHA OMEGA","GLOBAL FIC FIM","","",""
-      "Data Cotação","Qtde Cota","Valor Cota","Valor Aplicado","Valor Bruto","IR Previsto","IOF Previsto","Valor Liquido"
-      "08/11/2022","21994.01998227","R $ 1,66128320","R $ 35.000,00","R $ 36.538,29","R $ 329,28","R $ 784,81","R $ 36.134,20"
-      """
-
-      update_attrs = %{
-        content: content,
-        title: "Fundos",
-        type: :fundos
-      }
+      update_attrs = %{content: content} = params_for(:update_fundos_csv)
 
       assert {
                :ok,
                [
+                 %CSV{
+                   content: ^content,
+                   title: "Fundos",
+                   type: :fundos,
+                   imported?: true
+                 },
                  {:ok,
                   {:updated,
                    %Investment{
@@ -528,11 +464,17 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "import_csv/1 successfully imports investments from a renda fixa CSV" do
-      attrs = params_for(:renda_fixa_csv)
+      attrs = %{content: content} = params_for(:renda_fixa_csv)
 
       assert {
                :ok,
                [
+                 %CSV{
+                   content: ^content,
+                   title: "Renda Fixa",
+                   type: :renda_fixa,
+                   imported?: true
+                 },
                  ok: %Investment{
                    current_value: 336_524,
                    id: id_1,
@@ -645,11 +587,17 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "import_csv/1 successfully imports investments from a renda variavel CSV" do
-      attrs = params_for(:renda_variavel_csv)
+      attrs = %{content: content} = params_for(:renda_variavel_csv)
 
       assert {
                :ok,
                [
+                 %CSV{
+                   content: ^content,
+                   title: "Renda Variável",
+                   type: :renda_variavel,
+                   imported?: true
+                 },
                  ok: %Investment{
                    current_value: 60_450,
                    id: id_1,
@@ -741,11 +689,17 @@ defmodule InvestmentTracker.CSVsTest do
     end
 
     test "import_csv/1 successfully imports investments from a tesouro direto CSV" do
-      attrs = params_for(:tesouro_direto_csv)
+      attrs = %{content: content} = params_for(:tesouro_direto_csv)
 
       assert {
                :ok,
                [
+                 %CSV{
+                   content: ^content,
+                   title: "Tesouro Direto",
+                   type: :tesouro_direto,
+                   imported?: true
+                 },
                  ok: %Investment{
                    current_value: 2_676_504,
                    id: id_1,
