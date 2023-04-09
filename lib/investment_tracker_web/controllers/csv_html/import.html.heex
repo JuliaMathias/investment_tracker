@@ -16,10 +16,10 @@
 </.list>
 
 <section>
-  <br>
-  <br>
-  <br>
-  <br>
+  <br />
+  <br />
+  <br />
+  <br />
   <.header>
     Investments
     <:subtitle>These are the imported investments</:subtitle>
@@ -37,17 +37,19 @@
 </section>
 
 <section>
-  <br>
-  <br>
-  <br>
-  <br>
+  <br />
+  <br />
+  <br />
+  <br />
   <.header>
     Investment Histories
     <:subtitle>These are the imported investment histories</:subtitle>
   </.header>
 
-    <.table id="investment_histories" rows={@investment_histories}>
-    <:col :let={investment_history} label="investment id"><%= investment_history.investment_id %></:col>
+  <.table id="investment_histories" rows={@investment_histories}>
+    <:col :let={investment_history} label="investment id">
+      <%= investment_history.investment_id %>
+    </:col>
     <:col :let={investment_history} label="value"><%= investment_history.value %></:col>
     <:col :let={investment_history} label="date"><%= investment_history.inserted_at %></:col>
   </.table>
@@ -55,21 +57,20 @@
 
 <%= if @operations != [] do %>
   <section>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
+    <br />
     <.header>
       Operations
       <:subtitle>These are the imported operations</:subtitle>
     </.header>
-      <.table id="operations" rows={@operations}>
-        <:col :let={operation} label="investment id"><%= operation.investment_id %></:col>
-        <:col :let={operation} label="type"><%= operation.type %></:col>
-        <:col :let={operation} label="value"><%= operation.value %></:col>
-      </.table>
+    <.table id="operations" rows={@operations}>
+      <:col :let={operation} label="investment id"><%= operation.investment_id %></:col>
+      <:col :let={operation} label="type"><%= operation.type %></:col>
+      <:col :let={operation} label="value"><%= operation.value %></:col>
+    </.table>
   </section>
 <% end %>
-
 
 <.back navigate={~p"/csvs"}>Back to csvs</.back>
