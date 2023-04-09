@@ -62,7 +62,7 @@ defmodule InvestmentTracker.Wallet do
              investment_id: investment.id,
              value: investment.current_value
            }) do
-      {:ok, investment}
+      {:ok, Repo.preload(investment, [:investment_histories])}
     else
       {:error, changeset} -> {:error, changeset}
       changeset -> {:error, changeset}
@@ -91,7 +91,7 @@ defmodule InvestmentTracker.Wallet do
              investment_id: investment.id,
              value: investment.current_value
            }) do
-      {:ok, investment}
+      {:ok, Repo.preload(investment, [:investment_histories])}
     else
       {:error, changeset} -> {:error, changeset}
       changeset -> {:error, changeset}

@@ -7,6 +7,7 @@ defmodule InvestmentTracker.Factory.CSVs do
     quote do
       def csv_factory do
         %CSV{
+          id: Ecto.UUID.generate(),
           content: "some content",
           title: "some title",
           type: :renda_fixa,
