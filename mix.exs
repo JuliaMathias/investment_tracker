@@ -50,7 +50,7 @@ defmodule InvestmentTracker.MixProject do
       {:esbuild, "~> 0.7", [runtime: true]},
       {:excoveralls, "~> 0.16", [only: :test]},
       {:ex_machina, "~> 2.7"},
-      {:finch, "~> 0.15"},
+      {:finch, "~> 0.16"},
       {:floki, ">= 0.30.0", [only: :test]},
       {:gettext, "~> 0.22"},
       {:jason, "~> 1.2"},
