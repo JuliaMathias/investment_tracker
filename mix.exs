@@ -47,7 +47,7 @@ defmodule InvestmentTracker.MixProject do
       {:credo, "~> 1.5", [only: [:dev, :test], runtime: false]},
       {:dialyxir, "~> 1.1", [only: [:dev, :test], runtime: false]},
       {:ecto_sql, "~> 3.6"},
-      {:esbuild, "~> 0.7", [runtime: true]},
+      {:esbuild, "~> 0.8", [runtime: true]},
       {:excoveralls, "~> 0.16", [only: :test]},
       {:ex_machina, "~> 2.7"},
       {:finch, "~> 0.16"},
