@@ -52,7 +52,7 @@ defmodule InvestmentTracker.MixProject do
       {:ex_machina, "~> 2.7"},
       {:finch, "~> 0.16"},
       {:floki, ">= 0.30.0", [only: :test]},
-      {:gettext, "~> 0.22"},
+      {:gettext, "~> 0.24"},
       {:jason, "~> 1.2"},
       {:nimble_csv, "~> 1.1"},
       {:phoenix, "~> 1.7.2"},
