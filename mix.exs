@@ -57,7 +57,7 @@ defmodule InvestmentTracker.MixProject do
       {:nimble_csv, "~> 1.1"},
       {:phoenix, "~> 1.7.2"},
       {:phoenix_ecto, "~> 4.4"},
-      {:phoenix_html, "~> 3.3"},
+      {:phoenix_html, "~> 4.0"},
       {:phoenix_live_dashboard, "~> 0.8.0"},
       {:phoenix_live_reload, "~> 1.2", [only: :dev]},
       {:phoenix_live_view, "~> 0.19.0"},
